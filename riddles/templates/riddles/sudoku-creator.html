@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block scripts %}
+    {{ block.super }}
+    <script src="{% static 'riddles/js/sudoku-creator.js' %}"></script>
+{% endblock %}
+{% block title %}Sudoku Creator{% endblock %}
+{% block body %}
+    <h1>Sudoku Creator</h1>
+    <button id="submit" class="btn btn-primary">Submit</button>
+{% endblock %}
+{% block endscripts %}
+    <script>
+        Creator.init("{{ csrf_token }}");
+    </script>
+{% endblock %}

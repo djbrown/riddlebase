@@ -1,0 +1,86 @@
+/* Borders */
+
+line.border {
+    stroke: #AAA;
+    stroke-width: 1;
+}
+
+line.border.bold {
+    stroke: black;
+    stroke-width: 3;
+}
+
+/* RiddleManager */
+
+svg#riddle {
+    user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+}
+
+svg#riddle.full-screen {
+    width: 100%;
+}
+
+rect#riddle-background {
+    fill: white;
+}
+
+/* RiddleManager Cells */
+
+g.riddle-cell {
+    cursor: default;
+}
+
+g.riddle-cell.state, g.picker-cell {
+    cursor: pointer;
+}
+
+rect.riddle-cell-background {
+    fill: white;
+}
+
+rect.riddle-cell-background.winning {
+    fill: lawngreen;
+    transition: fill 0.5s ease-out 0s;
+}
+
+g.riddle-cell.state:hover > rect.riddle-cell-background {
+    fill: #DDD;
+}
+
+text.value {
+    dominant-baseline: central;
+    fill: black;
+    font-family: Arial, sans-serif;
+    font-size: 24px;
+    text-anchor: middle;
+}
+
+text.value.pattern {
+    fill: blue;
+}
+
+/* Picker */
+rect#picker-background {
+    fill: #EEE;
+}
+
+rect.picker-cell-background {
+    fill: #DDD;
+}
+
+line.border.picker-border {
+    stroke: #EEE;
+    stroke-width: 2px;
+}
+
+line.border.picker-border.bold {
+    stroke: #C00;
+}
+
+text.value.picker-value {
+    font-size: 20px;
+}

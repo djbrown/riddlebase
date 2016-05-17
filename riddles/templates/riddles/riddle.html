@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block styles %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'riddles/css/riddle.css' %}">
+{% endblock %}
+{% block scripts %}
+    {{ block.super }}
+    <script src="{% static 'riddles/js/riddle-manager.js' %}"></script>
+{% endblock %}
+{% block body %}
+    {{ block.super }}
+    <h1>{{ riddle_type }} {{ riddle_id }}</h1>
+    {% if user.is_authenticated %}
+        <div id="user-controls">
+            <button class="btn btn-success" id="save">Save</button>
+        </div>
+    {% endif %}
+    <br>
+    <div id="riddle-controls">
+        <button class="btn btn-danger" id="reset">Reset</button>
+        <button class="btn btn-default" id="back">Back</button>
+        <button class="btn btn-default" id="forward">Forward</button>
+        <button class="btn btn-default" id="shrink"><span class="glyphicon glyphicon-zoom-out"></span></button>
+        <button class="btn btn-default" id="restore-size"><span class="glyphicon glyphicon-search"></span></button>
+        <button class="btn btn-default" id="enlarge"><span class="glyphicon glyphicon-zoom-in"></span></button>
+        <button class="btn btn-default" id="full-screen"><span class="glyphicon glyphicon-fullscreen"></span></button>
+    </div>
+    <br/>
+    <div>
+        <svg id="riddle" shape-rendering="crispEdges">
+            <g id="riddle-values"></g>
+            <g id="riddle-grid"></g>
+            <g id="picker">
+                <rect id="picker-background" x="0" y="0" width="0" height="0"></rect>
+                <g id="picker-values"></g>
+                <g id="picker-grid"></g>
+            </g>
+        </svg>
+    </div>
+    {% if previous_id %}
+        <a id="previous-riddle" class="btn btn-default" href="../{{ previous_id }}">Previous</a>
+    {% endif %}
+    {% if next_id %}
+        <a id="next-riddle" class="btn btn-default" href="../{{ next_id }}">Next</a>
+    {% else %}
+        <a id="next-riddle" class="btn btn-default disabled" href="#">Next</a>
+    {% endif %}
+{% endblock %}
+{% block endscripts %}
+    {{ block.super }}
+    <script>
+        RiddleManager.init();
+    </script>
+    {% block initriddle %}{% endblock %}
+    <script>
+        RiddleManager.adjustViewBox();
+        RiddleManager.resetZoom();
+    </script>
+{% endblock %}

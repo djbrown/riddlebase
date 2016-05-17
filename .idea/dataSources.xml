@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="1720000554">
+    <data-source source="LOCAL" name="Django RiddleBase" uuid="285c9b6f-2cd4-4278-b0fb-78d81670b0a2">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>$PROJECT_DIR$/RiddleBase/settings.py</remarks>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:C:\Users\danie\PycharmProjects\RiddleBase\db.sqlite3</jdbc-url>
+      <explain-plan-config>
+        <provider>com.intellij.database.plan.ExplainPlanProvider.NullExplainPlanProvider</provider>
+      </explain-plan-config>
+    </data-source>
+  </component>
+</project>
