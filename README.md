@@ -1,2 +1,2 @@
 # RiddleBase
-A website for solving logic puzzle games
+A website for doing logic puzzle games
