@@ -2,7 +2,7 @@ import os
 
 from django.test import TestCase, LiveServerTestCase
 from selenium import webdriver
-from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+from selenium.webdriver.common.keys import Keys
 
 from riddles import util
 
@@ -50,24 +50,21 @@ class TestUnitIsSquare(TestCase):
 
 class TestSeleniumRiddle(LiveServerTestCase):
     def setUp(self):
-        path = 'C:\\Users\\danie\\webdrivers\\marionette\\wires.exe'
-        firefox_capabilities = DesiredCapabilities.FIREFOX
-        firefox_capabilities['marionette'] = True
-        firefox_capabilities['binary'] = path
-
-        desired_cap = {
+        capabilities = {
             'platform': "Mac OS X 10.9",
             'browserName': "chrome",
             'version': "31",
-            'tunnel-identifier': os.environ["TRAVIS_JOB_NUMBER"],
         }
+        if os.environ.get("TRAVIS"):
+            capabilities['tunnel-identifier'] = os.environ["TRAVIS_JOB_NUMBER"],
+
         executor = "http://{}:{}@ondemand.saucelabs.com:80/wd/hub".format(
             os.environ["SAUCE_USERNAME"],
             os.environ["SAUCE_ACCESS_KEY"],
         )
         self.selenium = webdriver.Remote(
             command_executor=executor,
-            desired_capabilities=desired_cap,
+            desired_capabilities=capabilities,
         )
 
         super(LiveServerTestCase, self).setUp()
@@ -76,8 +73,32 @@ class TestSeleniumRiddle(LiveServerTestCase):
         self.selenium.quit()
         super(LiveServerTestCase, self).tearDown()
 
-    def test_riddle_exists(self):
+    def test_register(self):
         selenium = self.selenium
-        selenium.get('ondemand.saucelabs.com:80/riddles/sudoku/1/')
-        riddle = selenium.find_element_by_id('riddle')
-        self.assertEqual(riddle.id, "riddle")
+
+        # Opening the link we want to test
+        selenium.get('http://127.0.0.1:8000/accounts/register/')
+
+        # find the form element
+        first_name = selenium.find_element_by_id('id_first_name')
+        last_name = selenium.find_element_by_id('id_last_name')
+        username = selenium.find_element_by_id('id_username')
+        email = selenium.find_element_by_id('id_email')
+        password1 = selenium.find_element_by_id('id_password1')
+        password2 = selenium.find_element_by_id('id_password2')
+
+        submit = selenium.find_element_by_name('register')
+
+        # Fill the form with data
+        first_name.send_keys('Homer')
+        last_name.send_keys('Simpson')
+        username.send_keys('duffman')
+        email.send_keys('homer@simpson.com')
+        password1.send_keys('123456')
+        password2.send_keys('123456')
+
+        # submitting the form
+        submit.send_keys(Keys.RETURN)
+
+        # check the returned result
+        assert 'Check your email' in selenium.page_source
