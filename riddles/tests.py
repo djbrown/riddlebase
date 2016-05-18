@@ -56,6 +56,7 @@ class TestSeleniumRiddle(LiveServerTestCase):
             'version': "31",
         }
         if os.environ.get("TRAVIS"):
+            print(os.environ["TRAVIS_JOB_NUMBER"])
             capabilities['tunnel-identifier'] = os.environ["TRAVIS_JOB_NUMBER"],
 
         executor = "http://{}:{}@ondemand.saucelabs.com:80/wd/hub".format(
