@@ -19,7 +19,7 @@ class RiddleType(models.Model):
 
 
 class Riddle(models.Model):
-    type = models.ForeignKey(RiddleType)
+    riddle_type = models.ForeignKey(RiddleType)
     solution = models.TextField()
     pattern = models.TextField()
     difficulty = models.IntegerField(validators=[
@@ -57,7 +57,7 @@ RIDDLE_TYPES = {
 
 
 class Sudoku(Riddle):
-    type = RIDDLE_TYPES["Sudoku"]
+    riddle_type = RIDDLE_TYPES["Sudoku"]
     box_rows = models.IntegerField(verbose_name='Number of horizontal box-rows', validators=[
         MinValueValidator(2)])
 
