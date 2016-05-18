@@ -1,8 +1,11 @@
 import math
 
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
+
+from riddles import util
 
 
 class RiddleType(models.Model):
@@ -32,12 +35,29 @@ class Riddle(models.Model):
         next_set = Sudoku.objects.filter(id__gt=self.id).order_by('-id')
         return next_set.get().id if next_set else None
 
+    @staticmethod
+    def check_solution(pattern, solution) -> bool:
+        raise NotImplementedError()
+
+    def clean(self):
+        pat_len = len(self.pattern)
+        sol_len = len(self.solution)
+        if pat_len != sol_len:
+            raise ValidationError('Pattern length does not match solution length.')
+        if not util.is_square(pat_len):
+            raise ValidationError('Riddle value length is not square.')
+
     class Meta:
         abstract = True
 
 
+RIDDLE_TYPES = {
+    "Sudoku": RiddleType.objects.all().filter(name='Sudoku')
+}
+
+
 class Sudoku(Riddle):
-    # TODO assign Sudoku-RiddleType instance to this type
+    type = RIDDLE_TYPES["Sudoku"]
     box_rows = models.IntegerField(verbose_name='Number of horizontal box-rows', validators=[
         MinValueValidator(2)])
 
@@ -65,19 +85,6 @@ class Sudoku(Riddle):
             row = list(self.solution[cell_i:cell_i + self.size])
             array.append(row)
         return array
-
-    @property
-    def state_as_two_dimensional_array(self) -> list:
-        array = []
-        for row_i in range(self.size):
-            cell_i = row_i * self.size
-            row = list(self.state[cell_i:cell_i + self.size])
-            array.append(row)
-        return array
-
-    @property
-    def box_columns(self) -> int:
-        return int(self.size / self.box_rows)
 
     def __str__(self) -> str:
         return "Sudoku-{}".format(self.id)
