@@ -1,7 +1,7 @@
 import os
-import sys
 from unittest import skip
 
+import sys
 from django.test import TestCase, LiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -58,9 +58,8 @@ class TestSeleniumRiddle(LiveServerTestCase):
             'version': "31",
         }
         if os.environ.get("TRAVIS"):
-            sys.stdout.write(os.environ["TRAVIS_JOB_NUMBER"])
-            travis_job_number = os.environ["TRAVIS_JOB_NUMBER"][0]
-            capabilities['tunnel-identifier'] = travis_job_number,
+            travis_job_number = os.environ["TRAVIS_JOB_NUMBER"]
+            capabilities['tunnel-identifier'] = str(travis_job_number),
 
         executor = "http://{}:{}@ondemand.saucelabs.com:80/wd/hub".format(
             os.environ["SAUCE_USERNAME"],
