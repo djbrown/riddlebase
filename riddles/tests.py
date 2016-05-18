@@ -56,10 +56,12 @@ class TestSeleniumRiddle(LiveServerTestCase):
             'platform': "Mac OS X 10.9",
             'browserName': "chrome",
             'version': "31",
+
         }
         if os.environ.get("TRAVIS"):
             travis_job_number = os.environ["TRAVIS_JOB_NUMBER"]
-            capabilities['tunnel-identifier'] = str(travis_job_number),
+            capabilities['tunnel-identifier'] = travis_job_number,
+            capabilities['dummy'] = "dummyval",
 
         executor = "http://{}:{}@ondemand.saucelabs.com:80/wd/hub".format(
             os.environ["SAUCE_USERNAME"],
