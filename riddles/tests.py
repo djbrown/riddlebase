@@ -56,7 +56,7 @@ class TestSeleniumRiddle(LiveServerTestCase):
             'platform': "Mac OS X 10.9",
             'browserName': "chrome",
             'version': "31",
-
+            'tunnel-identifier': None,
         }
         if os.environ.get("TRAVIS"):
             travis_job_number = os.environ["TRAVIS_JOB_NUMBER"]
