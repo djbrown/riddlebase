@@ -1,7 +1,6 @@
 import os
 from unittest import skip
 
-import sys
 from django.test import TestCase, LiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -56,7 +55,7 @@ class TestSeleniumRiddle(LiveServerTestCase):
             'platform': "Mac OS X 10.9",
             'browserName': "chrome",
             'version': "31",
-            'tunnel-identifier': os.environ["TRAVIS_JOB_NUMBER"],
+            'tunnel-identifier': os.environ.get("TRAVIS_JOB_NUMBER"),
         }
         if not os.environ.get("TRAVIS"):
             capabilities['tunnel-identifier'] = None
@@ -80,9 +79,8 @@ class TestSeleniumRiddle(LiveServerTestCase):
     def test_navbar_exists(self):
         selenium = self.selenium
         selenium.get('http://127.0.0.1:8000/')
-        sys.stdout.write(selenium.page_source)
-        # navbar = selenium.find_element_by_id('navbar')
-        # self.assertIsNotNone(navbar)
+        nav = selenium.find_element_by_id('navbar')
+        self.assertIsNotNone(nav)
 
     @skip("Register page not implemented yet")
     def test_register(self):
