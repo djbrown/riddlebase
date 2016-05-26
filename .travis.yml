@@ -6,10 +6,15 @@ python:
 # command to install dependencies
 install:
   - pip install -r requirements.txt
-  - python setup.py -q install
+  - pip install .
+#  - python setup.py -q install
 
 addons:
   sauce_connect: true
 
 # command to run tests
-script: python manage.py test
+script: coverage python manage.py test
+
+after_success:
+  - coverage report
+  - coveralls
