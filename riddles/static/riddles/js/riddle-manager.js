@@ -13,6 +13,15 @@ RiddleManager = (function () {
         $("#restore-size").click(resetZoom);
         $("#enlarge").click(createSetZoomDeltaFunction(zoomDelta));
         $("#full-screen").click(toggleFullScreen);
+
+        if (document.getElementById("save") !== null) {
+            initUserControls();
+        }
+    }
+
+    function initUserControls() {
+        // TODO: init user controls (save, restore, comment, rate)
+        console.log("initializing user controls")
     }
 
     function adjustViewBox() {
