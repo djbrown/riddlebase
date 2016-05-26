@@ -82,6 +82,12 @@ class TestSeleniumRiddle(LiveServerTestCase):
         nav = selenium.find_element_by_id('navbar')
         self.assertIsNotNone(nav)
 
+    def test_w3_org_exists(self):
+        selenium = self.selenium
+        selenium.get('https://www.w3.org/')
+        body = selenium.find_element_by_id('www-w3-org')
+        self.assertIsNotNone(body)
+
     @skip("Register page not implemented yet")
     def test_register(self):
         selenium = self.selenium
