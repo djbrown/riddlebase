@@ -16,7 +16,7 @@ class TestConfig(SeleniumTestCase):
 # @skip("generates error code 502 bad gatewey in sauce labs")
     def test_navbar_exists(self):
         driver = self.driver
-        driver.get('http://127.0.0.1:8000/')
+        driver.get('http://127.0.0.1:8081/')
         nav = driver.find_element_by_id('navbar')
         self.assertIsNotNone(nav)
 
