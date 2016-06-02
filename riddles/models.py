@@ -1,5 +1,3 @@
-import math
-
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
@@ -11,16 +9,11 @@ from riddles import util
 class RiddleType(models.Model):
     name = models.CharField(max_length=100, unique=True)
     description = models.TextField()
-    created = models.DateTimeField(editable=False)
-    modified = models.DateTimeField()
+    created_on = models.DateTimeField(auto_now_add=True)
+    modified_on = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return "RiddleType: {}".format(self.name)
-
-
-RIDDLE_TYPES = {
-    "Sudoku": RiddleType.objects.all().filter(name='Sudoku')
-}
 
 
 class Riddle(models.Model):
@@ -30,15 +23,18 @@ class Riddle(models.Model):
     difficulty = models.IntegerField(validators=[
         MinValueValidator(1),
         MaxValueValidator(10)])
+    created_on = models.DateTimeField(auto_now_add=True)
+    modified_on = models.DateTimeField(auto_now=True)
     # Todo: add field "created:Time" and "creator:User"
-    objects = models.Manager()
+    # Todo: store local copy of included frameworks: bootstrap and jquery
+    # objects = models.Manager()
 
     def previous_id(self):
-        previous_set = Sudoku.objects.filter(id__lt=self.id).order_by('id')
+        previous_set = Riddle.objects.filter(id__lt=self.id).order_by('id')
         return previous_set.get().id if previous_set else None
 
     def next_id(self):
-        next_set = Sudoku.objects.filter(id__gt=self.id).order_by('-id')
+        next_set = Riddle.objects.filter(id__gt=self.id).order_by('-id')
         return next_set.get().id if next_set else None
 
     @staticmethod
@@ -53,52 +49,15 @@ class Riddle(models.Model):
         if not util.is_square(pat_len):
             raise ValidationError('Riddle value length is not square.')
 
-    class Meta:
-        abstract = True
-
-
-class Sudoku(Riddle):
-    riddle_type = RIDDLE_TYPES["Sudoku"]
-    box_rows = models.IntegerField(verbose_name='Number of horizontal box-rows', validators=[
-        MinValueValidator(2)])
-
-    @property
-    def cells(self) -> int:
-        return len(self.solution)
-
-    @property
-    def size(self) -> int:
-        return int(math.sqrt(self.cells))
-
-    @property
-    def solution_as_list(self) -> list:
-        return list(self.solution)
-
-    @property
-    def pattern_as_list(self) -> list:
-        return list(self.pattern)
-
-    @property
-    def solution_as_two_dimensional_array(self) -> list:
-        array = []
-        for row_i in range(self.size):
-            cell_i = row_i * self.size
-            row = list(self.solution[cell_i:cell_i + self.size])
-            array.append(row)
-        return array
-
-    @staticmethod
-    def check_solution(pattern, solution) -> bool:
-        raise NotImplementedError
-
-    def __str__(self) -> str:
-        return "Sudoku-{}".format(self.id)
-
 
 class RiddleState(models.Model):
     user = models.ForeignKey(User, models.CASCADE)  # editable=False)
-    riddle = models.ForeignKey(Sudoku, models.CASCADE)  # editable=False)
-    value = models.TextField()
+    riddle = models.ForeignKey(Riddle, models.CASCADE)  # editable=False)
+    grid = models.TextField()
+    values = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True)
+    modified_on = models.DateTimeField(auto_now=True)
+    finished = models.BooleanField(default=False)
 
     class Meta:
         unique_together = ("user", "riddle")

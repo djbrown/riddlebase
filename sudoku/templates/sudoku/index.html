@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Sudokus{% endblock %}
+{% block body %}
+    <h1>Sudokus</h1>
+    <a href="{% url 'riddles:sudoku:creator' %}" class="btn btn-primary">Create Sudoku</a>
+    <h2>There are {{ ids|length }} Sudokus</h2>
+    <ul>
+        {% for id in ids %}
+            <li><a href="{% url 'riddles:sudoku:riddle' id %}">Sudoku {{ id }}</a></li>
+        {% empty %}
+            <li>No Sudokus submitted yet!</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

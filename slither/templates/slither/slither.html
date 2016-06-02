@@ -1,0 +1,11 @@
+{% extends 'riddles/riddle.html' %}
+{% load staticfiles %}
+{% block scripts %}
+    {{ block.super }}
+    <script src="{% static 'riddles/js/../../static/js/slither.js' %}"></script>
+{% endblock %}
+{% block initriddle %}
+    <script>
+        Riddle.init("{{ pattern }}", "{{ numbers }}", "{{ state }}", {{ size }});
+    </script>
+{% endblock %}

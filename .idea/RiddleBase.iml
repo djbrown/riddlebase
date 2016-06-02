@@ -24,7 +24,8 @@
       <list>
         <option value="$MODULE_DIR$/templates" />
         <option value="$MODULE_DIR$/riddles/templates" />
-        <option value="$MODULE_DIR$/home/templates" />
+        <option value="$MODULE_DIR$/slither/templates" />
+        <option value="$MODULE_DIR$/sudoku/templates" />
       </list>
     </option>
   </component>

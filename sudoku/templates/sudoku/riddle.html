@@ -1,0 +1,11 @@
+{% extends 'riddles/riddle.html' %}
+{% load staticfiles %}
+{% block scripts %}
+    {{ block.super }}
+    <script src="{% static 'sudoku/js/riddle.js' %}"></script>
+{% endblock %}
+{% block initriddle %}
+    <script>
+        Riddle.init("{{ pattern }}", "{{ state }}", {{ box_rows }});
+    </script>
+{% endblock %}

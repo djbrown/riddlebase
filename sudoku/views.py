@@ -3,62 +3,63 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 
-from riddles.models import Sudoku, RiddleState
-from slither.models import Slither
+from riddles.models import RiddleState
+from sudoku.models import Sudoku
 
 
-def slithers(request):
-    return render(request, 'slither/slithers.html', {
-        'ids': list(riddle.id for riddle in Sudoku.objects.all()),
+def index(request):
+    return render(request, 'sudoku/index.html', {
+        'ids': list(sudoku.id for sudoku in Sudoku.objects.all()),
     })
 
 
-def slither(request, riddle_id):
+def riddle(request, riddle_id):
     try:
-        riddle = Slither.objects.get(pk=riddle_id)
+        sudoku = Sudoku.objects.get(pk=riddle_id)
     except Sudoku.DoesNotExist:
         raise Http404("Sudoku does not exist")
 
-    state_value = riddle.pattern
+    state_values = sudoku.pattern
     if request.user.is_authenticated():
-        states = RiddleState.objects.filter(user=request.user, riddle=riddle)
+        states = RiddleState.objects.filter(user=request.user, riddle=sudoku)
         if len(states) is 1:
-            state_value = states[0].value
+            state_values = states[0].values
         elif len(states) is 0:
-            state = RiddleState(user=request.user, riddle=riddle, value=riddle.pattern)
+            state = RiddleState(user=request.user, riddle=sudoku, values=sudoku.pattern)
             state.save()
-            state_value = state.values
+            state_values = state.values
 
     return render(request, 'sudoku/riddle.html', {
         'riddle_type': 'Riddle',
-        'riddle_id': riddle.id,
-        'pattern': riddle.pattern,
-        'state': state_value,
-        'box_rows': riddle.box_rows,
-        'previous_id': riddle.previous_id(),
-        'next_id': riddle.next_id(),
+        'riddle_id': sudoku.id,
+        'pattern': sudoku.pattern,
+        'state': state_values,
+        'box_rows': sudoku.box_rows,
+        'previous_id': sudoku.previous_id(),
+        'next_id': sudoku.next_id(),
     })
+
 
 @csrf_exempt
 @require_POST
-def sudoku_check(request, riddle_id):
+def check(request, riddle_id):
     try:
-        riddle = Sudoku.objects.get(pk=riddle_id)
+        sudoku = Sudoku.objects.get(pk=riddle_id)
     except Sudoku.DoesNotExist:
         raise Http404("Sudoku does not exist")
 
     proposal = request.POST.get("proposal")
-    correct = proposal is not None and proposal == riddle.solution
+    correct = proposal is not None and proposal == sudoku.solution
     response = {'correct': correct}
     return JsonResponse(response)
 
 
-def sudoku_creator(request):
+def creator(request):
     return render(request, 'sudoku/creator.html')
 
 
 @require_POST
-def create_sudoku(request):
+def create(request):
     error = []
     if not request.user.has_perm("riddles.add_sudoku"):
         error.append("no permission")

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Riddles{% endblock %}
+{% block body %}
+    <h1>Riddles</h1>
+    <ul>
+        <li>
+            <a href="{% url 'riddles:sudokus' %}">Sudokus</a>
+        </li>
+    </ul>
+{% endblock %}

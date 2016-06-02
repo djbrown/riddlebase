@@ -1,0 +1,22 @@
+[
+  {
+    "model": "riddles.riddletype",
+    "pk": 1,
+    "fields": {
+      "name": "Sudoku",
+      "description": "Write numbers from 1 to N into the cells of the diagram of size NxN, so that each number occurs exactly once in each row, in each column, occasionally in each region and occasionally in each diagonal.",
+      "created_on": "2016-06-02T10:50:15.365Z",
+      "modified_on": "2016-06-02T10:50:26.739Z"
+    }
+  },
+  {
+    "model": "riddles.riddletype",
+    "pk": 2,
+    "fields": {
+      "name": "Slither Link",
+      "description": "Regeln: \u2460 Zeichnen Sie entlang der Rasterlinien einen einzigen Rundweg in das Diagramm ein, der keinen Rasterpunkt mehrfach durchl\u00e4uft. \u2461 Eine Zahl in einem Feld gibt an, wie viele Rasterlinien um das Feld herum vom Rundweg verwendet werden. \u2462 Um ein Feld ohne Zahl k\u00f6nnen beliebig viele Linien gezeichnet werden.",
+      "created_on": "2016-06-02T10:50:15.365Z",
+      "modified_on": "2016-06-02T11:06:48.859Z"
+    }
+  }
+]

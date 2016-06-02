@@ -16,16 +16,17 @@
                            data-toggle="dropdown" href="{% url 'riddles:index' %}">Riddles <span
                             class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="{% url 'riddles:sudokus' %}">Sudokus</a></li>
+                            <li><a href="{% url 'riddles:sudoku:index' %}">Sudoku</a></li>
+                            <li><a href="{% url 'index' %}">Slither</a></li>
                         </ul>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                {% if user.is_authenticated %}
-                    <li><a href="{% url 'logout' %}">Logout</a></li>
-                {% else %}
-                    <li><a href="{% url 'login' %}">Login</a></li>
-                {% endif %}
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'logout' %}">Logout</a></li>
+                    {% else %}
+                        <li><a href="{% url 'login' %}">Login</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
