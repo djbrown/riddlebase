@@ -13,7 +13,7 @@ addons:
 
 # command to run tests
 script:
-  - coverage run --source=riddles manage.py test
+  - coverage run manage.py test
 
 after_success:
   - coverage report
