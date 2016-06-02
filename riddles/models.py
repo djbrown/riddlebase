@@ -18,6 +18,11 @@ class RiddleType(models.Model):
         return "RiddleType: {}".format(self.name)
 
 
+RIDDLE_TYPES = {
+    "Sudoku": RiddleType.objects.all().filter(name='Sudoku')
+}
+
+
 class Riddle(models.Model):
     riddle_type = models.ForeignKey(RiddleType)
     solution = models.TextField()
@@ -25,6 +30,7 @@ class Riddle(models.Model):
     difficulty = models.IntegerField(validators=[
         MinValueValidator(1),
         MaxValueValidator(10)])
+    # Todo: add field "created:Time" and "creator:User"
     objects = models.Manager()
 
     def previous_id(self):
@@ -49,11 +55,6 @@ class Riddle(models.Model):
 
     class Meta:
         abstract = True
-
-
-RIDDLE_TYPES = {
-    "Sudoku": RiddleType.objects.all().filter(name='Sudoku')
-}
 
 
 class Sudoku(Riddle):
@@ -85,6 +86,10 @@ class Sudoku(Riddle):
             row = list(self.solution[cell_i:cell_i + self.size])
             array.append(row)
         return array
+
+    @staticmethod
+    def check_solution(pattern, solution) -> bool:
+        raise NotImplementedError
 
     def __str__(self) -> str:
         return "Sudoku-{}".format(self.id)
