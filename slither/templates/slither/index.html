@@ -1,10 +1,14 @@
 {% extends 'base.html' %}
-{% block title %}Riddles{% endblock %}
+{% block title %}Slither Links{% endblock %}
 {% block body %}
-    <h1>Riddles</h1>
+    <h1>Slither Links</h1>
+    <a href="{% url 'riddles:slither:creator' %}" class="btn btn-primary">Create Slither Link</a>
+    <h2>There are {{ ids|length }} Slither Links</h2>
     <ul>
-        <li>
-            <a href="{% url 'riddles:sudokus' %}">Sudokus</a>
-        </li>
+        {% for id in ids %}
+            <li><a href="{% url 'riddles:sudoku' id %}">Slither Link {{ id }}</a></li>
+        {% empty %}
+            <li>No Slither Links submitted yet!</li>
+        {% endfor %}
     </ul>
 {% endblock %}
