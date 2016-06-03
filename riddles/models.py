@@ -62,10 +62,6 @@ class RiddleState(models.Model):
     class Meta:
         unique_together = ("user", "riddle")
 
-    @property
-    def finished(self) -> bool:
-        return self.state == self.riddle.solution
-
     def __str__(self) -> str:
         return "RiddleState-{}-{}".format(self.riddle, self.user)
 
