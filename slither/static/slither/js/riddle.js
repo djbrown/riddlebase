@@ -2,61 +2,7 @@ var RiddleManager;
 
 var Riddle = (function () {
 
-    var select;
-
-    function hidePicker() {
-        document.getElementById("picker").classList.add("hide");
-    }
-
-    function hideSelectionHighlight() {
-        select.classList.remove("selected");
-    }
-
-    function endSelection() {
-        hidePicker();
-        hideSelectionHighlight();
-    }
-
-    function showPicker(row, column) {
-        var picker = document.getElementById("picker");
-        //noinspection JSUnresolvedFunction
-        var pickerWidth = picker.getBBox().width;
-        //noinspection JSUnresolvedFunction
-        var pickerHeight = picker.getBBox().height;
-
-        var svg = document.getElementById("riddle");
-        //noinspection JSUnresolvedFunction
-        var svgWidth = svg.getBBox().width;
-        //noinspection JSUnresolvedFunction
-        var svgHeight = svg.getBBox().height;
-
-        var size = RiddleManager.RIDDLE_CELL_SIZE;
-        var pickerX = size * (column + 1);
-        var pickerY = size * (row + 1);
-
-        if (pickerX + pickerWidth > svgWidth) {
-            pickerX = (size * (column - 1)) - pickerWidth;
-        }
-        if (pickerY + pickerHeight > svgHeight) {
-            pickerY = (size * (row - 1)) - pickerHeight;
-        }
-
-        var transform = "translate(" + pickerX + ", " + pickerY + ")";
-        picker.setAttribute("transform", transform);
-
-        picker.classList.remove("hide");
-    }
-
-    function showSelectionHighlight() {
-        select.classList.add("selected");
-    }
-
-    function startSelection(row, column) {
-        showPicker(row, column);
-        showSelectionHighlight();
-    }
-
-    function createRiddleCellClickFunction(row, column) {
+    function createBorderClickFunction(row, column) {
         return function () {
             var picker = document.getElementById("picker");
             var pickerIsOpen = !picker.classList.contains("hide");
@@ -72,39 +18,24 @@ var Riddle = (function () {
         };
     }
 
-    function addRect(parent, x, y, width, height, classNames) {
-        var rect = RiddleManager.createSvgElement("rect");
-        rect.setAttribute("x", x);
-        rect.setAttribute("y", y);
-        rect.setAttribute("width", width);
-        rect.setAttribute("height", height);
+    function addIndicator(parent, value, x, y, id, classNames) {
+        var indicator = RiddleManager.createSvgElement("text");
+        indicator.setAttribute("id", id);
+        indicator.setAttribute("x", x);
+        indicator.setAttribute("y", y);
 
         classNames.forEach(function (className) {
-            rect.classList.add(className);
-        });
-
-        parent.appendChild(rect);
-
-    }
-
-    function addText(parent, value, x, y, id, classNames) {
-        var text = RiddleManager.createSvgElement("text");
-        text.setAttribute("id", id);
-        text.setAttribute("x", x);
-        text.setAttribute("y", y);
-
-        classNames.forEach(function (className) {
-            text.classList.add(className);
+            indicator.classList.add(className);
         });
 
         var textNode = document.createTextNode(value);
-        text.appendChild(textNode);
+        indicator.appendChild(textNode);
 
-        parent.appendChild(text);
+        parent.appendChild(indicator);
     }
 
     function addRiddleCell(pattern, state, row, column, numbers) {
-        var values = document.getElementById("riddle-values");
+        var indicatorsGroup = document.getElementById("riddle-indicators");
 
         var cell = RiddleManager.createSvgElement("g");
         cell.classList.add("riddle-cell");
@@ -135,22 +66,24 @@ var Riddle = (function () {
         var textX = size / 2;
         var textY = size / 2;
         var id = "riddle-value-" + row + "-" + column;
-        addText(cell, value, textX, textY, id, classNames);
+        addIndicator(cell, value, textX, textY, id, classNames);
 
         if (classNames.indexOf("state") !== -1) {
-            var riddleCellClickFunction = createRiddleCellClickFunction(row, column);
+            var riddleCellClickFunction = createBorderClickFunction(row, column);
             cell.addEventListener("click", riddleCellClickFunction);
         }
 
-        values.appendChild(cell);
+        indicatorsGroup.appendChild(cell);
     }
 
-    function createRiddleCells(pattern, state) {
-        var numbers = Math.sqrt(pattern.length);
-        for (var row = 0; row < numbers; row++) {
-            for (var column = 0; column < numbers; column++) {
-                addRiddleCell(pattern, state, row, column, numbers);
+    function createIndicators(indicators, breadth) {
+        var diagonale = breadth * 2 - 1;
+        for (var row = 0; row < diagonale; row++) {
+            var columns = breadth + row;
+            for (var column = 0; column < columns; column++) {
+                addRiddleCell();
             }
+            columns++;
         }
     }
 
@@ -202,7 +135,7 @@ var Riddle = (function () {
         addBorder(gridBold, size * numbers, y, size, "v", true, classNames);
     }
 
-    function createRiddleGrid(numbers, boxRows, boxColumns) {
+    function createGrid(numbers, boxRows, boxColumns) {
         var gridThin = document.getElementById("riddle-grid-thin");
         var gridBold = document.getElementById("riddle-grid-bold");
 
@@ -241,17 +174,9 @@ var Riddle = (function () {
         RiddleManager.check(proposal, showWinningAnimation);
     }
 
-    function init(pattern, numbers, state) {
-        var numbers = Math.sqrt(pattern.length);
-        var boxColumns = numbers / boxRows;
-
-        createRiddleCells(pattern, state);
-        createRiddleGrid(numbers, boxRows, boxColumns);
-
-        createPickerCells(numbers);
-        createPickerGrid(numbers);
-
-        hidePicker();
+    function init(pattern, indicators, state, breadth) {
+        createIndicators(indicators, breadth);
+        createGrid(pattern, state, breadth);
     }
 
     return {
