@@ -305,9 +305,7 @@ var Riddle = (function () {
 
     function createPickerGridRow(columns, size, row, gridOuter, gridInner, borderClassNames) {
         var y = size * row;
-        addBorder(gridOuter, 0, y, size, "v", true, borderClassNames);
-        addBorder(gridOuter, 0, y, size, "h", true, borderClassNames);
-        for (var column = 1; column < columns; column++) {
+        for (var column = 0; column < columns; column++) {
             var x = size * column;
 
             var isVBoxBorder = column === 0;
