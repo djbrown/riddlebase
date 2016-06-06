@@ -46,10 +46,10 @@ class Riddle(models.Model):
             raise ValidationError('Riddle value length is not square.')
 
     @staticmethod
-    def check_solution(pattern, solution) -> bool:
+    def check_solution(pattern: str, solution: str) -> bool:
         raise NotImplementedError()
 
-    def get_or_create_state(self, user):
+    def get_or_create_state(self, user: User) -> str:
         state_values = self.pattern
         if user.is_authenticated():
             try:
@@ -61,7 +61,7 @@ class Riddle(models.Model):
                 state_values = state.values
         return state_values
 
-    def get_context(self, user) -> dict:
+    def get_context(self, user: User) -> dict:
         return {
             "riddle_id": self.id,
             "riddle_type": self.riddle_type.name,
