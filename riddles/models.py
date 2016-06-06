@@ -37,10 +37,6 @@ class Riddle(models.Model):
         next_set = Riddle.objects.filter(id__gt=self.id).order_by('-id')
         return next_set[0].id if next_set else None
 
-    @staticmethod
-    def check_solution(pattern, solution) -> bool:
-        raise NotImplementedError()
-
     def clean(self):
         pat_len = len(self.pattern)
         sol_len = len(self.solution)
@@ -48,6 +44,10 @@ class Riddle(models.Model):
             raise ValidationError('Pattern length does not match solution length.')
         if not util.is_square(pat_len):
             raise ValidationError('Riddle value length is not square.')
+
+    @staticmethod
+    def check_solution(pattern, solution) -> bool:
+        raise NotImplementedError()
 
 
 class RiddleState(models.Model):
