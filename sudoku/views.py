@@ -19,25 +19,11 @@ def riddle(request, riddle_id):
     except Sudoku.DoesNotExist:
         raise Http404("Sudoku does not exist")
 
-    state_values = sudoku.pattern
-    if request.user.is_authenticated():
-        states = RiddleState.objects.filter(user=request.user, riddle=sudoku)
-        if len(states) is 1:
-            state_values = states[0].values
-        elif len(states) is 0:
-            state = RiddleState(user=request.user, riddle=sudoku, values=sudoku.pattern)
-            state.save()
-            state_values = state.values
-
-    return render(request, 'sudoku/riddle.html', {
-        'riddle_type': 'Riddle',
-        'riddle_id': sudoku.id,
-        'pattern': sudoku.pattern,
-        'state': state_values,
+    context = sudoku.get_context(request.user)
+    context.update({
         'box_rows': sudoku.box_rows,
-        'previous_id': sudoku.previous_id(),
-        'next_id': sudoku.next_id(),
     })
+    return render(request, 'sudoku/riddle.html', context)
 
 
 @csrf_exempt

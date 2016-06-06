@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from django.core.exceptions import ValidationError
+from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 
@@ -25,16 +25,16 @@ class Riddle(models.Model):
         MaxValueValidator(10)])
     created_on = models.DateTimeField(auto_now_add=True)
     modified_on = models.DateTimeField(auto_now=True)
+
     # Todo: add field "created:Time" and "creator:User"
     # Todo: store local copy of included frameworks: bootstrap and jquery
-    # objects = models.Manager()
 
     def previous_id(self):
-        previous_set = Riddle.objects.filter(id__lt=self.id).order_by('id')
+        previous_set = Riddle.objects.filter(id__lt=self.id).order_by('-id')
         return previous_set[0].id if previous_set else None
 
     def next_id(self):
-        next_set = Riddle.objects.filter(id__gt=self.id).order_by('-id')
+        next_set = Riddle.objects.filter(id__gt=self.id).order_by('id')
         return next_set[0].id if next_set else None
 
     def clean(self):
@@ -49,13 +49,35 @@ class Riddle(models.Model):
     def check_solution(pattern, solution) -> bool:
         raise NotImplementedError()
 
+    def get_or_create_state(self, user):
+        state_values = self.pattern
+        if user.is_authenticated():
+            try:
+                state = self.riddlestate
+                state_values = state.values
+            except ObjectDoesNotExist:
+                state = RiddleState(user=user, riddle=self, values=self.pattern)
+                state.save()
+                state_values = state.values
+        return state_values
+
+    def get_context(self, user) -> dict:
+        return {
+            "riddle_id": self.id,
+            "riddle_type": self.riddle_type.name,
+            "pattern": self.pattern,
+            "state": self.get_or_create_state(user),
+            'previous_id': self.previous_id(),
+            'next_id': self.next_id(),
+        }
+
     def __str__(self):
         return "Riddle: {} {}".format(self.riddle_type.name, self.id)
 
 
 class RiddleState(models.Model):
-    user = models.ForeignKey(User, models.CASCADE)  # editable=False)
-    riddle = models.ForeignKey(Riddle, models.CASCADE)  # editable=False)
+    user = models.ForeignKey(User, models.CASCADE)
+    riddle = models.OneToOneField(Riddle, models.CASCADE)
     grid = models.TextField()
     values = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
