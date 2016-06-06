@@ -31,11 +31,11 @@ class Riddle(models.Model):
 
     def previous_id(self):
         previous_set = Riddle.objects.filter(id__lt=self.id).order_by('id')
-        return previous_set.get().id if previous_set else None
+        return previous_set[0].id if previous_set else None
 
     def next_id(self):
         next_set = Riddle.objects.filter(id__gt=self.id).order_by('-id')
-        return next_set.get().id if next_set else None
+        return next_set[0].id if next_set else None
 
     @staticmethod
     def check_solution(pattern, solution) -> bool:
