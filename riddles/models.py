@@ -49,6 +49,9 @@ class Riddle(models.Model):
     def check_solution(pattern, solution) -> bool:
         raise NotImplementedError()
 
+    def __str__(self):
+        return "Riddle: {} {}".format(self.riddle_type.name, self.id)
+
 
 class RiddleState(models.Model):
     user = models.ForeignKey(User, models.CASCADE)  # editable=False)
