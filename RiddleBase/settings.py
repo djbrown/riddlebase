@@ -120,7 +120,3 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
-
-# Cookies
-SESSION_COOKIE_DOMAIN = None
-SESSION_COOKIE_SECURE = False
