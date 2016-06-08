@@ -1,9 +1,8 @@
-from django.http import Http404, JsonResponse
+from django.http import Http404, JsonResponse, HttpRequest
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 
-from riddles.models import Sudoku, RiddleState
 from slither.models import Slither
 
 
@@ -26,8 +25,8 @@ def view_riddle(request, riddle_id):
 @require_POST
 def rest_check(request, riddle_id):
     try:
-        riddle = Sudoku.objects.get(pk=riddle_id)
-    except Sudoku.DoesNotExist:
+        riddle = Slither.objects.get(pk=riddle_id)
+    except Slither.DoesNotExist:
         raise Http404("Sudoku does not exist")
 
     proposal = request.POST.get("proposal")
@@ -57,10 +56,10 @@ def rest_create(request: HttpRequest) -> JsonResponse:
     if error:
         return JsonResponse({'error': error})
 
-    created = Sudoku(solution=solution,
-                     pattern=pattern,
-                     state=pattern,
-                     difficulty=5,
-                     box_rows=3)
+    created = Slither(solution=solution,
+                      pattern=pattern,
+                      state=pattern,
+                      difficulty=5,
+                      box_rows=3)
     created.save()
     return JsonResponse({'id': created.id})
