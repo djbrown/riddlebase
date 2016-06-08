@@ -1,8 +1,12 @@
+from django.contrib.auth.models import User
 from django.db import models
 
-# Create your models here.
 from riddles.models import RiddleType, Riddle
 
 
 class Slither(Riddle):
-    pass
+    breadth = models.IntegerField()
+
+    @staticmethod
+    def check_solution(pattern: str, solution: str) -> bool:
+        pass

@@ -8,17 +8,19 @@ from slither.models import Slither
 
 def view_index(request):
     return render(request, 'slither/index.html', {
-        'ids': list(slither.id for slither in Slither.objects.all()),
+        'ids': list(riddle.id for riddle in Slither.objects.all()),
     })
 
 
 def view_riddle(request, riddle_id):
     try:
-        slither = Slither.objects.get(pk=riddle_id)
+        riddle = Slither.objects.get(pk=riddle_id)
     except Slither.DoesNotExist:
-        raise Http404("Sudoku does not exist")
+        raise Http404("Riddle does not exist")
 
-    return render(request, 'sudoku/riddle.html', slither.get_context(request.user))
+    context = riddle.get_context(request.user)
+    context.update({"breadth": riddle.breadth})
+    return render(request, 'slither/riddle.html', context)
 
 
 @csrf_exempt
@@ -27,7 +29,7 @@ def rest_check(request, riddle_id):
     try:
         riddle = Slither.objects.get(pk=riddle_id)
     except Slither.DoesNotExist:
-        raise Http404("Sudoku does not exist")
+        raise Http404("Riddle does not exist")
 
     proposal = request.POST.get("proposal")
     correct = proposal is not None and proposal == riddle.solution
@@ -36,16 +38,16 @@ def rest_check(request, riddle_id):
 
 
 def view_creator(request):
-    return render(request, 'sudoku/creator.html')
+    return render(request, 'slither/creator.html')
 
 
 @require_POST
 def rest_create(request: HttpRequest) -> JsonResponse:
     error = []
-    if not request.user.has_perm("riddles.add_sudoku"):
+    if not request.user.has_perm("riddles.add_slither"):
         error.append("no permission")
 
-    solution = request.POST.get("solution")
+    solution = request.POST.get("slither")
     pattern = request.POST.get("pattern")
 
     if solution is None:
