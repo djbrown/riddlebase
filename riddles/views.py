@@ -1,15 +1,12 @@
 import datetime
 
-from django.http import Http404, JsonResponse
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
-from django.views.decorators.csrf import csrf_exempt
-from django.views.decorators.http import require_POST
 
 from RiddleBase import settings
-from .models import *
 
 
-def index(request):
+def index(request: HttpRequest) -> HttpResponse:
     return render(request, 'riddles/index.html')
 
 

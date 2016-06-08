@@ -7,41 +7,24 @@ from riddles.models import Sudoku, RiddleState
 from slither.models import Slither
 
 
-def slithers(request):
-    return render(request, 'slither/slithers.html', {
-        'ids': list(riddle.id for riddle in Sudoku.objects.all()),
+def view_index(request):
+    return render(request, 'slither/index.html', {
+        'ids': list(slither.id for slither in Slither.objects.all()),
     })
 
 
-def slither(request, riddle_id):
+def view_riddle(request, riddle_id):
     try:
-        riddle = Slither.objects.get(pk=riddle_id)
-    except Sudoku.DoesNotExist:
+        slither = Slither.objects.get(pk=riddle_id)
+    except Slither.DoesNotExist:
         raise Http404("Sudoku does not exist")
 
-    state_value = riddle.pattern
-    if request.user.is_authenticated():
-        states = RiddleState.objects.filter(user=request.user, riddle=riddle)
-        if len(states) is 1:
-            state_value = states[0].value
-        elif len(states) is 0:
-            state = RiddleState(user=request.user, riddle=riddle, value=riddle.pattern)
-            state.save()
-            state_value = state.values
+    return render(request, 'sudoku/riddle.html', slither.get_context(request.user))
 
-    return render(request, 'sudoku/riddle.html', {
-        'riddle_type': 'Riddle',
-        'riddle_id': riddle.id,
-        'pattern': riddle.pattern,
-        'state': state_value,
-        'box_rows': riddle.box_rows,
-        'previous_id': riddle.previous_id(),
-        'next_id': riddle.next_id(),
-    })
 
 @csrf_exempt
 @require_POST
-def sudoku_check(request, riddle_id):
+def rest_check(request, riddle_id):
     try:
         riddle = Sudoku.objects.get(pk=riddle_id)
     except Sudoku.DoesNotExist:
@@ -53,12 +36,12 @@ def sudoku_check(request, riddle_id):
     return JsonResponse(response)
 
 
-def sudoku_creator(request):
+def view_creator(request):
     return render(request, 'sudoku/creator.html')
 
 
 @require_POST
-def create_sudoku(request):
+def rest_create(request: HttpRequest) -> JsonResponse:
     error = []
     if not request.user.has_perm("riddles.add_sudoku"):
         error.append("no permission")

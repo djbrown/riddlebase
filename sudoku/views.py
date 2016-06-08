@@ -1,6 +1,4 @@
-from django.http import Http404, JsonResponse
-from django.http.request import HttpRequest
-from django.http.response import HttpResponse
+from django.http import Http404, JsonResponse, HttpRequest, HttpResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
@@ -8,13 +6,13 @@ from django.views.decorators.http import require_POST
 from sudoku.models import Sudoku
 
 
-def index(request) -> HttpResponse:
+def view_index(request) -> HttpResponse:
     return render(request, 'sudoku/index.html', {
         'ids': list(sudoku.id for sudoku in Sudoku.objects.all()),
     })
 
 
-def riddle(request: HttpRequest, riddle_id: int) -> HttpResponse:
+def view_riddle(request: HttpRequest, riddle_id: int) -> HttpResponse:
     try:
         sudoku = Sudoku.objects.get(pk=riddle_id)
     except Sudoku.DoesNotExist:
@@ -27,9 +25,13 @@ def riddle(request: HttpRequest, riddle_id: int) -> HttpResponse:
     return render(request, 'sudoku/riddle.html', context)
 
 
+def view_creator(request: HttpRequest) -> HttpResponse:
+    return render(request, 'sudoku/creator.html')
+
+
 @csrf_exempt
 @require_POST
-def check(request: HttpRequest, riddle_id: int) -> JsonResponse:
+def rest_check(request: HttpRequest, riddle_id: int) -> JsonResponse:
     try:
         sudoku = Sudoku.objects.get(pk=riddle_id)
     except Sudoku.DoesNotExist:
@@ -41,12 +43,8 @@ def check(request: HttpRequest, riddle_id: int) -> JsonResponse:
     return JsonResponse(response)
 
 
-def creator(request: HttpRequest) -> HttpResponse:
-    return render(request, 'sudoku/creator.html')
-
-
 @require_POST
-def create(request: HttpRequest) -> JsonResponse:
+def rest_create(request: HttpRequest) -> JsonResponse:
     error = []
     if not request.user.has_perm("riddles.add_sudoku"):
         error.append("no permission")
