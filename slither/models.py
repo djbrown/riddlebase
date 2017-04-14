@@ -5,8 +5,13 @@ from riddles.models import RiddleType, Riddle
 
 
 class Slither(Riddle):
-    breadth = models.IntegerField()
+    width = models.IntegerField()
+    height = models.IntegerField()
 
     @staticmethod
     def check_solution(pattern: str, solution: str) -> bool:
         pass
+
+
+class Square(Slither):
+    pass
