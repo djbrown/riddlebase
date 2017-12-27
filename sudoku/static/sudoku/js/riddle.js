@@ -5,7 +5,7 @@ var Riddle = (function () {
     var select;
 
     function hidePicker() {
-        document.getElementById("picker").classList.add("hide");
+        document.getElementById("picker").classList.add("picker-hidden");
     }
 
     function hideSelectionHighlight() {
@@ -44,7 +44,7 @@ var Riddle = (function () {
         var transform = "translate(" + pickerX + ", " + pickerY + ")";
         picker.setAttribute("transform", transform);
 
-        picker.classList.remove("hide");
+        picker.classList.remove("picker-hidden");
     }
 
     function showSelectionHighlight() {
@@ -59,7 +59,7 @@ var Riddle = (function () {
     function createRiddleCellClickFunction(row, column) {
         return function () {
             var picker = document.getElementById("picker");
-            var pickerIsOpen = !picker.classList.contains("hide");
+            var pickerIsOpen = !picker.classList.contains("picker-hidden");
 
             if (select) {
                 endSelection();

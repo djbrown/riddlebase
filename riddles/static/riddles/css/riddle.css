@@ -88,3 +88,7 @@ line.border.picker-border.bold {
 text.value.picker-value {
     font-size: 20px;
 }
+
+#picker.picker-hidden {
+    visibility: hidden;
+}
