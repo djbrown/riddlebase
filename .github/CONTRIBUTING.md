@@ -13,12 +13,12 @@ https://opensource.guide/
 # Issues
 
 The preferred way of giving feedback is via GitHub Issues.<br/>
-You should choose one of the [Issue Templates](https://github.com/djbrown/hbscorez/issues/new/choose)
+You should choose one of the [Issue Templates](https://github.com/djbrown/riddlebase/issues/new/choose)
 
 
 # Forum
 
-Alternatively, if you don't want to create an account on GitHub you can also use the public [QA Forum](https://redmine.djbrown.de/projects/hbscorez/boards) anonymously.
+Alternatively, if you don't want to create an account on GitHub you can also use the public [QA Forum](https://redmine.djbrown.de/projects/riddlebase/boards) anonymously.
 
 
 # Developing Python
@@ -39,5 +39,5 @@ You can contribute to this Project using any IDE, Editor or Terminal you like, a
 The following command will clean your code accordingly: `pipenv run autopep8`
 
 Also make sure to check messages from the following commands before proposing:
-* `pipenv run mypy hbscorez`
+* `pipenv run mypy .`
 * `pipenv run flake8`

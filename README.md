@@ -18,7 +18,7 @@ RiddleBase is powered by Django
 
 ## Running via Docker
 
-`docker run -p 8001:8000 djbrown/hbscorez`<br/>
+`docker run -p 8001:8000 djbrown/riddlebase`<br/>
 Container is reachable under [0.0.0.0:8001](http://0.0.0.0:8001)
 
 ## Running natively
