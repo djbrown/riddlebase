@@ -1,0 +1,26 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+Django = ">=2.0"
+"Jinja2" = "*"
+
+[dev-packages]
+bandit = "*"
+codacy-coverage = "*"
+codecov = "*"
+coverage = "*"
+coveralls = "*"
+mypy = "*"
+pip-licenses = "*"
+ptpython = "*"
+pylint = "*"
+sauceclient = "*"
+selenium = "*"
+"autopep8" = "*"
+"flake8" = "*"
+
+[requires]
+python_version = "3.6"
