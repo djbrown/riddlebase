@@ -16,7 +16,7 @@ script:
     ./manage.py test - pipenv run coverage xml
   - pipenv run mypy .
 after_success:
-  - pipenv run coveralls
   - pipenv run codecov
+  - pipenv run coveralls
   - pipenv run python-codacy-coverage -r coverage.xml
   - fossa

@@ -17,7 +17,7 @@ class RiddleType(models.Model):
 
 
 class Riddle(models.Model):
-    riddle_type = models.ForeignKey(RiddleType)
+    riddle_type = models.ForeignKey(RiddleType, on_delete=models.CASCADE)
     solution = models.TextField()
     pattern = models.TextField()
     difficulty = models.IntegerField(validators=[
