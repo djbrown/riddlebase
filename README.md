@@ -4,7 +4,12 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/9c0920594c0544d9b63caf9fab3970d8)](https://www.codacy.com/app/dan-brown/RiddleBase?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=dan-brown/RiddleBase&amp;utm_campaign=Badge_Coverage)
 [![Sauce Test Status](https://saucelabs.com/buildstatus/dan-brown)](https://saucelabs.com/u/dan-brown)
 [![Sauce Test Status](https://saucelabs.com/browser-matrix/dan-brown.svg)](https://saucelabs.com/u/dan-brown)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fdjbrown%2Friddlebase.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fdjbrown%2Friddlebase?ref=badge_shield)
 # RiddleBase
 
 
 A website for doing logic puzzle games
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fdjbrown%2Friddlebase.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fdjbrown%2Friddlebase?ref=badge_large)
