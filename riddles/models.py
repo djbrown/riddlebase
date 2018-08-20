@@ -1,6 +1,8 @@
 from django.contrib.auth.models import User
-from django.core.exceptions import ValidationError, ObjectDoesNotExist
-from django.core.validators import MinValueValidator, MaxValueValidator
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
+from django.core.exceptions import ObjectDoesNotExist, ValidationError
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
 from riddles import util
@@ -25,6 +27,9 @@ class Riddle(models.Model):
         MaxValueValidator(10)])
     created_on = models.DateTimeField(auto_now_add=True)
     modified_on = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        abstract = True
 
     # Todo: add field "created:Time" and "creator:User"
     # Todo: store local copy of included frameworks: bootstrap and jquery
@@ -76,16 +81,16 @@ class Riddle(models.Model):
 
 
 class RiddleState(models.Model):
-    user = models.ForeignKey(User, models.CASCADE)
-    riddle = models.OneToOneField(Riddle, models.CASCADE)
-    grid = models.TextField()
-    values = models.TextField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    riddle_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    riddle_id = models.PositiveIntegerField()
+    riddle = GenericForeignKey('riddle_type', 'riddle_id')
+    value = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     modified_on = models.DateTimeField(auto_now=True)
-    finished = models.BooleanField(default=False)
 
     class Meta:
-        unique_together = ("user", "riddle")
+        unique_together = ("user", "riddle_type", "riddle_id")
 
     def __str__(self) -> str:
         return "RiddleState-{}-{}".format(self.riddle, self.user)

@@ -25,6 +25,7 @@ selenium = "*"
 "pep8" = "*"
 pylama = "*"
 rope = "*"
+dparse = {version = "*", extras = ["pipenv"]}
 
 [requires]
 python_version = "3.6"

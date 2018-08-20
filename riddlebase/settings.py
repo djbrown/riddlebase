@@ -6,8 +6,6 @@ SECRET_KEY = '3o%2#a9$6s^=-__namvc(8lwb5k_c*!k3%l#((eaa7fie1or-6'
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -15,6 +13,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'base',
     'riddles',
     'sudoku',
     'slither',
@@ -49,7 +48,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'RiddleBase.wsgi.application'
+WSGI_APPLICATION = 'riddlebase.wsgi.application'
 
 DATABASES = {
     'default': {

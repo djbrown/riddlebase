@@ -11,9 +11,8 @@ install:
 addons:
   sauce_connect: true
 script:
-  - >-
-    pipenv run coverage run --branch --source=. --omit=*/migrations/*
-    ./manage.py test - pipenv run coverage xml
+  - pipenv run coverage run --branch --source="." manage.py test
+  - pipenv run coverage xml
   - pipenv run mypy .
 after_success:
   - pipenv run codecov

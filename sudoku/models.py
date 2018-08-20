@@ -3,15 +3,16 @@ import math
 from django.core.validators import MinValueValidator
 from django.db import models
 
-from riddles.models import Riddle, RiddleType, RiddleState
-
-SUDOKU_TYPE = RiddleType.objects.filter(name='Sudoku')[0]
+from riddles.models import Riddle, RiddleType
 
 
 class Sudoku(Riddle):
-    # riddle_type = SUDOKU_TYPE
     box_rows = models.IntegerField(verbose_name='Number of horizontal box-rows', validators=[
         MinValueValidator(2)])
+
+    class Meta(Riddle.Meta):
+        # riddle_type = RiddleType.objects.filter(name='Sudoku')[0]
+        pass
 
     @property
     def cells(self) -> int:

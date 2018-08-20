@@ -1,7 +1,6 @@
 from django.contrib import admin
 
-from riddles.models import *
+from riddles.models import RiddleState, RiddleType
 
 admin.site.register(RiddleType)
-admin.site.register(Riddle)
 admin.site.register(RiddleState)
