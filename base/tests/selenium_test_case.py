@@ -15,7 +15,7 @@ class SeleniumTestCase(LiveServerTestCase):
         else:
             options = FirefoxOptions()
             options.add_argument('-headless')
-            self.driver = Firefox()  # firefox_options=options)
+            self.driver = Firefox(firefox_options=options)
         self.driver.implicitly_wait(10)
 
     def sauce_chrome_webdriver(self):
