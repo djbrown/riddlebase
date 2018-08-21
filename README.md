@@ -25,7 +25,7 @@ Container is reachable under [0.0.0.0:8001](http://0.0.0.0:8001)
 
 ### Requirements
 
-1. python3
+1. Python 3.7
 2. pipenv (`pip install pipenv`)
 
 

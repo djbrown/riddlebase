@@ -8,24 +8,27 @@ Django = ">=2.0"
 "Jinja2" = "*"
 
 [dev-packages]
+autopep8 = "*"
 bandit = "*"
 codacy-coverage = "*"
 codecov = "*"
 coverage = "*"
 coveralls = "*"
+dparse = {version = "*", extras = ["pipenv"]}
+flake8 = "*"
 mypy = "*"
+pep8 = "*"
 pip-licenses = "*"
 prospector = "*"
 ptpython = "*"
+pylama = "*"
 pylint = "*"
+rope = "*"
 sauceclient = "*"
 selenium = "*"
-"autopep8" = "*"
-"flake8" = "*"
-"pep8" = "*"
-pylama = "*"
-rope = "*"
-dparse = {version = "*", extras = ["pipenv"]}
 
 [requires]
-python_version = "3.6"
+python_version = "3.7"
+
+[scripts]
+test = "python manage.py test"
