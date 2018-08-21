@@ -16,37 +16,29 @@ RiddleBase is powered by Django
 
 [<img src="https://www.djangoproject.com/m/img/logos/django-logo-positive.svg" height="50" alt="Django Logo"/>](https://www.djangoproject.com/)
 
+
 ## Running via Docker
 
 `docker run -p 8001:8000 djbrown/riddlebase`<br/>
 Container is reachable under [0.0.0.0:8001](http://0.0.0.0:8001)
 
+
 ## Running natively
 
 ### Requirements
-
 1. Python 3.7
 2. pipenv (`pip install pipenv`)
 
 
 ### Installation
-
-`pipenv install` (add `--dev` to include development dependencies)<br/>
+`pipenv install`<br/>
 `pipenv run python manage.py migrate`
 
 ### Start Application
-
 `pipenv run python manage.py runserver`
 
-## Testing
 
-`pipenv run python manage.py test`
-
-with coverage:<br/>
-`pipenv run coverage run --branch --source=. --omit=*/migrations/* ./manage.py test`
-
-
-## Main Commands
+## Main Management Commands
 
 * **setup**: fetch associations, districts, seasons and leagues
 * **import_games**: fetch games and sport halls
@@ -57,9 +49,12 @@ Prepend `docker run <CONTAINER> ` when running via Docker.<br/>
 Append ` -h` to display Command help.
 
 
-
 ## License
+
+The project is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
+
 [![FOSSA License Report](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fdjbrown%2Friddlebase.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fdjbrown%2Friddlebase?ref=badge_large)
 
-## Contribute
-See [CONTRIBUTING.md](CONTRIBUTING.md)
+
+## Contributing
+See [CONTRIBUTING.md](.github/CONTRIBUTING.md)

@@ -2,11 +2,11 @@ from unittest import skip
 
 from selenium.webdriver.common.keys import Keys
 
-from base.tests.selenium_test_case import SeleniumTestCase
+from base.tests.base import SeleniumTestCase
 
 
-class BaseSeleniumTest(SeleniumTestCase):
-    def test_from_sauce(self):
+class TestSelenium(SeleniumTestCase):
+    def test_internet_connection(self):
         self.driver.get('https://saucelabs.com/test/guinea-pig')
         self.assertEqual('I am a page title - Sauce Labs', self.driver.title)
         body = self.driver.find_element_by_css_selector('body')

@@ -2,7 +2,7 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = '3o%2#a9$6s^=-__namvc(8lwb5k_c*!k3%l#((eaa7fie1or-6'
+SECRET_KEY = ' '
 
 DEBUG = True
 
@@ -90,3 +90,5 @@ STATICFILES_DIRS = [
 
 SESSION_COOKIE_DOMAIN = None
 SESSION_COOKIE_SECURE = False
+
+SELENIUM = False

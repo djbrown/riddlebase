@@ -1,18 +1,21 @@
 import os
+import unittest
 
-from django.test import LiveServerTestCase, tag
+from django.conf import settings
+from django.test import LiveServerTestCase
 from selenium.webdriver import Firefox, Remote
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from selenium.webdriver.support.ui import WebDriverWait
 
 
-@tag('selenium')
+@unittest.skipUnless(settings.SELENIUM is True or 'CI' in os.environ,
+                     'Selenium test cases are only run in CI or if configured explicitly.')
 class SeleniumTestCase(LiveServerTestCase):
 
     def setUp(self):
         if 'CI' in os.environ:
             self.driver = self.sauce_chrome_webdriver()
-        else:
+        elif settings.SELENIUM is True:
             options = FirefoxOptions()
             options.add_argument('-headless')
             self.driver = Firefox(firefox_options=options)
