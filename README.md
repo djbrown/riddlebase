@@ -27,7 +27,6 @@ Container is reachable under [0.0.0.0:8001](http://0.0.0.0:8001)
 
 1. python3
 2. pipenv (`pip install pipenv`)
-3. java (>=1.6) for parsing game report PDFs
 
 
 ### Installation
