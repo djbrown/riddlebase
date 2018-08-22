@@ -3,7 +3,7 @@ import math
 from django.core.validators import MinValueValidator
 from django.db import models
 
-from riddles.models import Riddle, RiddleType
+from riddles.models import Riddle
 
 
 class Sudoku(Riddle):

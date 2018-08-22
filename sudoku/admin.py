@@ -1,5 +1,5 @@
 from django.contrib import admin
 
-from sudoku.models import *
+from . import models
 
-admin.site.register(Sudoku)
+admin.site.register(models.Sudoku)
