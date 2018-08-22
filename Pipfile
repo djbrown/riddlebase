@@ -17,7 +17,6 @@ coveralls = "*"
 dparse = {version = "*", extras = ["pipenv"]}
 flake8 = "*"
 mypy = "*"
-pep8 = "*"
 pip-licenses = "*"
 prospector = "*"
 ptpython = "*"
@@ -31,4 +30,5 @@ selenium = "*"
 python_version = "3.7"
 
 [scripts]
+riddlebase = "python manage.py runserver 0.0.0.0:8000"
 test = "python manage.py test"
