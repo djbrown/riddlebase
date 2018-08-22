@@ -94,12 +94,3 @@ class RiddleState(models.Model):
 
     def __str__(self) -> str:
         return "RiddleState-{}-{}".format(self.riddle, self.user)
-
-
-def instances(model: models.Model) -> list:
-    instance_list = []
-    if not model._meta.abstract:
-        instance_list.extend(model.objects.all())
-    for sub_model in model.__subclasses__():
-        instance_list.extend(instances(sub_model))
-    return instance_list
