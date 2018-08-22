@@ -14,9 +14,9 @@ script:
   - diff ATTRIBUTIONS.md <(pipenv run pip-licenses -csaum)
   - pipenv run coverage run --branch --source="." manage.py test
   - pipenv run coverage xml
-  - pipenv run mypy -p base -p riddles
   - pipenv run flake8
 after_success:
+  - pipenv run mypy -p base -p riddles
   - pipenv run codecov
   - pipenv run coveralls
   - pipenv run python-codacy-coverage -r coverage.xml
