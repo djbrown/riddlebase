@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block title %}Sudokus{% endblock %}
-{% block body %}
+{% block content %}
     <h1>Sudokus</h1>
     <a href="{% url 'riddles:sudoku:creator' %}" class="btn btn-primary">Create Sudoku</a>
     <h2>There are {{ ids|length }} Sudokus</h2>

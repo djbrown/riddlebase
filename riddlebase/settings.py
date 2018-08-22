@@ -14,18 +14,18 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'base',
+    'users',
     'riddles',
     'sudoku',
     'slither',
 ]
 
-MIDDLEWARE_CLASSES = [
+MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -83,12 +83,25 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_ROOT = os.path.abspath(os.path.join(BASE_DIR, 'static-collected'))
+
 STATIC_URL = '/static/'
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 
-SESSION_COOKIE_DOMAIN = None
-SESSION_COOKIE_SECURE = False
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 
-SELENIUM = False
+EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'mails')
+
+
+# Auth
+
+LOGIN_REDIRECT_URL = 'index'
+
+LOGIN_URL = 'users:login'
+
+
+# Custom Settings
+
+SELENIUM = True

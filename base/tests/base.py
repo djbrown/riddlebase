@@ -1,10 +1,13 @@
 import os
 import unittest
+from contextlib import contextmanager
 
 from django.conf import settings
 from django.test import LiveServerTestCase
+from django.urls import ResolverMatch, resolve, reverse
 from selenium.webdriver import Firefox, Remote
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
+from selenium.webdriver.support.expected_conditions import staleness_of
 from selenium.webdriver.support.ui import WebDriverWait
 
 
@@ -42,6 +45,38 @@ class SeleniumTestCase(LiveServerTestCase):
             desired_capabilities=capabilities,
         )
 
+    def navigate(self, view_name: str):
+        path = reverse(view_name)
+        self.driver.get(self.live_server_url + path)
+
+    def assert_view(self, view_name: str):
+        path: str = self.driver.current_url.replace(self.live_server_url, '')
+        resolved: ResolverMatch = resolve(path)
+        self.assertEqual(resolved.view_name, view_name)
+
+    @contextmanager
+    def load(self, timeout=1):
+        page = self.driver.find_element_by_tag_name('html')
+        yield
+        WebDriverWait(self.driver, timeout).until(
+            staleness_of(page)
+        )
+
+    @contextmanager
+    def wait(self, timeout=1):
+        condition = _UrlHasChanged(self.driver.current_url)
+        yield
+        WebDriverWait(self.driver, timeout).until(condition)
+
     def tearDown(self):
         WebDriverWait(self.driver, 10)
         self.driver.quit()
+
+
+class _UrlHasChanged(object):
+
+    def __init__(self, url):
+        self.old_url = url
+
+    def __call__(self, driver):
+        return driver.current_url != self.old_url

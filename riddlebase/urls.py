@@ -1,11 +1,13 @@
-from django.contrib.auth import urls as auth_urls
+from django.contrib import admin
 from django.urls import include, path
 
-import base.views
 import riddles.urls
+import users.urls
+from base.views import index
 
 urlpatterns = [
-    path('', base.views.index, name='index'),
+    path('', index, name='index'),
     path('riddles/', include(riddles.urls)),
-    path('accounts/', include(auth_urls)),
+    path('users/', include(users.urls)),
+    path('admin/', admin.site.urls),
 ]

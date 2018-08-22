@@ -3,6 +3,7 @@
 /riddlebase/settings_prod.py
 /media/
 /static/
+/mails/
 
 ### Python
 __pycache__/
