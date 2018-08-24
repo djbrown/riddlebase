@@ -52,7 +52,7 @@
 | sauceclient           | 1.0.0     | Apache Software License                             | Corey Goldberg                            | https://github.com/cgoldberg/sauceclient                  |
 | selenium              | 3.14.0    | Apache Software License                             | UNKNOWN                                   | https://github.com/SeleniumHQ/selenium/                   |
 | setoptconf            | 0.2.0     | MIT License                                         | Jason Simeone                             | https://github.com/jayclassless/setoptconf                |
-| setuptools            | 40.1.1    | MIT License                                         | Python Packaging Authority                | https://github.com/pypa/setuptools                        |
+| setuptools            | 40.2.0    | MIT License                                         | Python Packaging Authority                | https://github.com/pypa/setuptools                        |
 | six                   | 1.11.0    | MIT License                                         | Benjamin Peterson                         | http://pypi.python.org/pypi/six/                          |
 | smmap2                | 2.0.4     | BSD License                                         | Sebastian Thiel                           | https://github.com/gitpython-developers/smmap             |
 | snowballstemmer       | 1.2.1     | BSD License                                         | Yoshiki Shibukawa                         | https://github.com/shibukawa/snowball_py                  |
