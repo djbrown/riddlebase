@@ -65,7 +65,7 @@ class SeleniumTestCase(LiveServerTestCase):
          requests.post(url, json=data, auth=auth)'''
         sauce_client = SauceClient(_SAUCE_USER, _SAUCE_KEY)
         status = (sys.exc_info() == (None, None, None))
-        sauce_client.jobs.update_job(self.driver.session_id, passed=status)
+        sauce_client.jobs.update_job(self.driver.session_id, build=_TUNNEL_ID, passed=status, )
         self.driver.quit()
 
     def navigate(self, view_name: str):
