@@ -12,7 +12,7 @@ class Logout(auth_views.LogoutView):
 
 
 class PasswordChange(auth_views.PasswordChangeView):
-    success_url = reverse_lazy('users:password_change')
+    success_url = reverse_lazy('users:password_change_success')
     template_name = 'users/password-change.html'
 
 
