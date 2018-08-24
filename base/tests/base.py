@@ -44,7 +44,7 @@ class SeleniumTestCase(LiveServerTestCase):
             'extendedDebugging': True,
         }
 
-        executor = "https://{}:{}@ondemand.saucelabs.com:443/wd/hub".format(
+        executor = "http://{}:{}@ondemand.saucelabs.com/wd/hub".format(
             _SAUCE_USER,
             _SAUCE_KEY,
         )
