@@ -55,8 +55,8 @@ class SeleniumTestCase(LiveServerTestCase):
     def tearDown(self):
         self.driver.quit()
         if _CI:
-        sauce_client = SauceClient(_SAUCE_USER, _SAUCE_KEY)
-        status = (sys.exc_info() == (None, None, None))
+            sauce_client = SauceClient(_SAUCE_USER, _SAUCE_KEY)
+            status = (sys.exc_info() == (None, None, None))
             sauce_client.jobs.update_job(job_id=self.driver.session_id, build=_TUNNEL_ID,
                                          passed=status)
 
