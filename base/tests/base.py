@@ -53,20 +53,12 @@ class SeleniumTestCase(LiveServerTestCase):
         )
 
     def tearDown(self):
-        '''url = "https://saucelabs.com/rest/v1/{}/jobs/{}".format(
-            _SAUCE_USER,
-            _SAUCE_KEY
-        )
-        data = {}
-        auth = (
-            _SAUCE_USER,
-            _SAUCE_KEY
-        )
-         requests.post(url, json=data, auth=auth)'''
+        self.driver.quit()
+        if _CI:
         sauce_client = SauceClient(_SAUCE_USER, _SAUCE_KEY)
         status = (sys.exc_info() == (None, None, None))
-        sauce_client.jobs.update_job(self.driver.session_id, build=_TUNNEL_ID, passed=status, )
-        self.driver.quit()
+            sauce_client.jobs.update_job(job_id=self.driver.session_id, build=_TUNNEL_ID,
+                                         passed=status)
 
     def navigate(self, view_name: str):
         path = reverse(view_name)
