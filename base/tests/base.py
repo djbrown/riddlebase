@@ -41,7 +41,6 @@ class SeleniumTestCase(LiveServerTestCase):
             'version': "31",
             'name': '{}.{}'.format(class_name, method_name),
             'tunnel-identifier': _TUNNEL_ID,
-            'extendedDebugging': True,
         }
 
         executor = "http://{}:{}@ondemand.saucelabs.com/wd/hub".format(
