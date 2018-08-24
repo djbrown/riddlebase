@@ -1,22 +1,30 @@
 import os
+import sys
 import unittest
 from contextlib import contextmanager
 
+# import requests
 from django.conf import settings
 from django.test import LiveServerTestCase
 from django.urls import ResolverMatch, resolve, reverse
+from sauceclient import SauceClient
 from selenium.webdriver import Firefox, Remote
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from selenium.webdriver.support.expected_conditions import staleness_of
 from selenium.webdriver.support.ui import WebDriverWait
 
+_CI = 'CI' in os.environ
+_TUNNEL_ID = os.environ.get("TRAVIS_JOB_NUMBER")
+_SAUCE_USER = os.environ.get("SAUCE_USERNAME")
+_SAUCE_KEY = os.environ.get("SAUCE_ACCESS_KEY")
 
-@unittest.skipUnless(settings.SELENIUM is True or 'CI' in os.environ,
+
+@unittest.skipUnless(settings.SELENIUM is True or _CI,
                      'Selenium test cases are only run in CI or if configured explicitly.')
 class SeleniumTestCase(LiveServerTestCase):
 
     def setUp(self):
-        if 'CI' in os.environ:
+        if _CI:
             self.driver = self.sauce_chrome_webdriver()
         elif settings.SELENIUM is True:
             options = FirefoxOptions()
@@ -27,23 +35,39 @@ class SeleniumTestCase(LiveServerTestCase):
     def sauce_chrome_webdriver(self):
         class_name = self.__class__.__name__
         method_name = self._testMethodName
-        tunnel_id = os.environ.get("TRAVIS_JOB_NUMBER")
         capabilities = {
             'platform': "Mac OS X 10.9",
             'browserName': "chrome",
             'version': "31",
             'name': '{}.{}'.format(class_name, method_name),
-            'tunnel-identifier': tunnel_id,
+            'tunnel-identifier': _TUNNEL_ID,
+            'extendedDebugging': True,
         }
 
-        executor = "http://{}:{}@ondemand.saucelabs.com:80/wd/hub".format(
-            os.environ["SAUCE_USERNAME"],
-            os.environ["SAUCE_ACCESS_KEY"],
+        executor = "https://{}:{}@ondemand.saucelabs.com/wd/hub".format(
+            _SAUCE_USER,
+            _SAUCE_KEY,
         )
         return Remote(
             command_executor=executor,
             desired_capabilities=capabilities,
         )
+
+    def tearDown(self):
+        '''url = "https://saucelabs.com/rest/v1/{}/jobs/{}".format(
+            _SAUCE_USER,
+            _SAUCE_KEY
+        )
+        data = {}
+        auth = (
+            _SAUCE_USER,
+            _SAUCE_KEY
+        )
+         requests.post(url, json=data, auth=auth)'''
+        sauce_client = SauceClient(_SAUCE_USER, _SAUCE_KEY)
+        status = (sys.exc_info() == (None, None, None))
+        sauce_client.jobs.update_job(self.driver.session_id, passed=status)
+        self.driver.quit()
 
     def navigate(self, view_name: str):
         path = reverse(view_name)
@@ -67,10 +91,6 @@ class SeleniumTestCase(LiveServerTestCase):
         condition = _UrlHasChanged(self.driver.current_url)
         yield
         WebDriverWait(self.driver, timeout).until(condition)
-
-    def tearDown(self):
-        WebDriverWait(self.driver, 10)
-        self.driver.quit()
 
 
 class _UrlHasChanged(object):
