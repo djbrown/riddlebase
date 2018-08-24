@@ -104,4 +104,4 @@ LOGIN_URL = 'users:login'
 
 # Custom Settings
 
-SELENIUM = True
+SELENIUM = False
