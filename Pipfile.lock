@@ -63,11 +63,10 @@
         },
         "bandit": {
             "hashes": [
-                "sha256:45bf1b361004e861e5b423b36ff5c700d21442753c841013c87f14a4639b1d74",
-                "sha256:a3aa04802194ec1fd290849e02b915824f9c3234623d7dcea6a33b1605ddb0ac"
+                "sha256:6102b5d6afd9d966df5054e0bdfc2e73a24d0fea400ec25f2e54c134412158d7",
+                "sha256:9413facfe9de1e1bd291d525c784e1beb1a55c9916b51dae12979af63a69ba4c"
             ],
-            "index": "pypi",
-            "version": "==1.5.0"
+            "version": "==1.5.1"
         },
         "certifi": {
             "hashes": [
