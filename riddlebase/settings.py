@@ -97,7 +97,7 @@ EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'mails')
 
 # Auth
 
-LOGIN_REDIRECT_URL = 'index'
+LOGIN_REDIRECT_URL = 'users:profile'
 
 LOGIN_URL = 'users:login'
 

@@ -8,9 +8,21 @@ from django.db import models
 from riddles import util
 
 
+class RiddleCategory(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    super_category = models.ForeignKey('self', on_delete=models.CASCADE)
+    description = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True)
+    modified_on = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return "RiddleCategory: {}".format(self.name)
+
+
 class RiddleType(models.Model):
     name = models.CharField(max_length=100, unique=True)
     description = models.TextField()
+    category = models.ForeignKey(RiddleCategory, on_delete=models.CASCADE)
     created_on = models.DateTimeField(auto_now_add=True)
     modified_on = models.DateTimeField(auto_now=True)
 
@@ -28,19 +40,16 @@ class Riddle(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     modified_on = models.DateTimeField(auto_now=True)
 
-    class Meta:
-        abstract = True
-
     # Todo: add field "created:Time" and "creator:User"
     # Todo: store local copy of included frameworks: bootstrap and jquery
 
-    def previous_id(self):
-        previous_set = Riddle.objects.filter(id__lt=self.id).order_by('-id')
-        return previous_set[0].id if previous_set else None
+    def previous_pk(self):
+        previous_set = Riddle.objects.filter(pk__lt=self.pk).order_by('-pk')
+        return previous_set[0].pk if previous_set else None
 
-    def next_id(self):
-        next_set = Riddle.objects.filter(id__gt=self.id).order_by('id')
-        return next_set[0].id if next_set else None
+    def next_pk(self):
+        next_set = Riddle.objects.filter(pk__gt=self.pk).order_by('pk')
+        return next_set[0].pk if next_set else None
 
     def clean(self):
         pat_len = len(self.pattern)
@@ -68,7 +77,7 @@ class Riddle(models.Model):
 
     def get_context(self, user: User) -> dict:
         return {
-            "riddle_id": self.id,
+            "riddle_id": self.pk,
             "riddle_type": self.riddle_type.name,
             "pattern": self.pattern,
             "state": self.get_or_create_state(user),
@@ -77,20 +86,18 @@ class Riddle(models.Model):
         }
 
     def __str__(self):
-        return "Riddle: {} {}".format(self.riddle_type.name, self.id)
+        return "Riddle: {} {}".format(self.riddle_type.name, self.pk)
 
 
 class RiddleState(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    riddle_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    riddle_id = models.PositiveIntegerField()
-    riddle = GenericForeignKey('riddle_type', 'riddle_id')
+    riddle = models.ForeignKey(Riddle, on_delete=models.CASCADE)
     value = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     modified_on = models.DateTimeField(auto_now=True)
 
     class Meta:
-        unique_together = ("user", "riddle_type", "riddle_id")
+        unique_together = ("user", "riddle")
 
     def __str__(self) -> str:
-        return "RiddleState-{}-{}".format(self.riddle, self.user)
+        return "RiddleState: {} {}".format(self.riddle, self.user)
