@@ -13,5 +13,6 @@ __pycache__/
 /.vscode/
 
 ### Tools
-/.mypy_cache/
+**/.mypy_cache/
 /geckodriver.log
+

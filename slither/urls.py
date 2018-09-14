@@ -2,7 +2,8 @@ from django.conf.urls import url
 
 from . import views
 
-app_name = 'riddles'
+app_name = 'slither'
+
 urlpatterns = [
     url(r'^$', views.view_index, name='index'),
     url(r'^(?P<riddle_id>[0-9]+)/$', views.view_riddle, name='riddle'),

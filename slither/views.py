@@ -1,4 +1,4 @@
-from django.http import Http404, JsonResponse, HttpRequest
+from django.http import Http404, HttpRequest, JsonResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
@@ -8,7 +8,7 @@ from slither.models import Slither
 
 def view_index(request):
     return render(request, 'slither/index.html', {
-        'ids': list(riddle.id for riddle in Slither.objects.all()),
+        'pks': list(riddle.pk for riddle in Slither.objects.all()),
     })
 
 
