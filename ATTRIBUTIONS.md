@@ -1,6 +1,6 @@
 | Name                  | Version   | License                                             | Author                                    | URL                                                       |
 |-----------------------|-----------|-----------------------------------------------------|-------------------------------------------|-----------------------------------------------------------|
-| Django                | 2.1       | BSD License                                         | Django Software Foundation                | https://www.djangoproject.com/                            |
+| Django                | 2.1.1     | BSD License                                         | Django Software Foundation                | https://www.djangoproject.com/                            |
 | GitPython             | 2.1.11    | BSD License                                         | Sebastian Thiel, Michael Trier            | https://github.com/gitpython-developers/GitPython         |
 | Jinja2                | 2.10      | BSD License                                         | Armin Ronacher                            | http://jinja.pocoo.org/                                   |
 | MarkupSafe            | 1.0       | BSD License                                         | Armin Ronacher                            | http://github.com/pallets/markupsafe                      |
@@ -8,14 +8,14 @@
 | PyYAML                | 3.13      | MIT License                                         | Kirill Simonov                            | http://pyyaml.org/wiki/PyYAML                             |
 | Pygments              | 2.2.0     | BSD License                                         | Georg Brandl                              | http://pygments.org/                                      |
 | astroid               | 2.0.4     | UNKNOWN                                             | Python Code Quality Authority             | https://github.com/PyCQA/astroid                          |
-| autopep8              | 1.3.5     | MIT License                                         | Hideo Hattori                             | https://github.com/hhatto/autopep8                        |
-| bandit                | 1.5.0     | Apache Software License                             | PyCQA                                     | https://bandit.readthedocs.io/en/latest/                  |
-| certifi               | 2018.8.13 | Mozilla Public License 2.0 (MPL 2.0)                | Kenneth Reitz                             | http://certifi.io/                                        |
+| autopep8              | 1.4       | MIT License                                         | Hideo Hattori                             | https://github.com/hhatto/autopep8                        |
+| bandit                | 1.5.1     | Apache Software License                             | PyCQA                                     | https://bandit.readthedocs.io/en/latest/                  |
+| certifi               | 2018.8.24 | Mozilla Public License 2.0 (MPL 2.0)                | Kenneth Reitz                             | http://certifi.io/                                        |
 | chardet               | 3.0.4     | GNU Library or Lesser General Public License (LGPL) | Daniel Blanchard                          | https://github.com/chardet/chardet                        |
 | codacy-coverage       | 1.3.11    | MIT License                                         | Codacy                                    | https://github.com/codacy/python-codacy-coverage          |
 | codecov               | 2.0.15    | Apache Software License                             | @codecov                                  | http://github.com/codecov/codecov-python                  |
 | coverage              | 4.5.1     | Apache Software License                             | Ned Batchelder and 100 others             | https://bitbucket.org/ned/coveragepy                      |
-| coveralls             | 1.3.0     | MIT License                                         | coveralls-clients contributors            | http://github.com/coveralls-clients/coveralls-python      |
+| coveralls             | 1.5.0     | MIT License                                         | coveralls-clients contributors            | http://github.com/coveralls-clients/coveralls-python      |
 | docopt                | 0.6.2     | MIT License                                         | Vladimir Keleshev                         | http://docopt.org                                         |
 | dodgy                 | 0.1.9     | MIT License                                         | landscape.io                              | https://github.com/landscapeio/dodgy                      |
 | dparse                | 0.4.1     | MIT License                                         | Jannis Gebauer                            | https://github.com/jayfk/dparse                           |
@@ -43,6 +43,7 @@
 | pyflakes              | 1.6.0     | MIT License                                         | A lot of people                           | https://github.com/PyCQA/pyflakes                         |
 | pylama                | 7.4.3     | UNKNOWN                                             | UNKNOWN                                   | UNKNOWN                                                   |
 | pylint                | 2.1.1     | GNU General Public License (GPL)                    | Python Code Quality Authority             | https://github.com/PyCQA/pylint                           |
+| pylint-django         | 2.0.2     | UNKNOWN                                             | landscape.io                              | https://github.com/PyCQA/pylint-django                    |
 | pylint-plugin-utils   | 0.4       | UNKNOWN                                             | landscape.io                              | https://github.com/landscapeio/pylint-plugin-utils        |
 | pyparsing             | 2.2.0     | MIT License                                         | Paul McGuire                              | http://pyparsing.wikispaces.com/                          |
 | pytz                  | 2018.5    | MIT License                                         | Stuart Bishop                             | http://pythonhosted.org/pytz                              |
