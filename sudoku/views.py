@@ -15,12 +15,11 @@ def view_index(request) -> HttpResponse:
 
 def view_riddle(request: HttpRequest, sudoku_number: int) -> HttpResponse:
     try:
-        riddle = Riddle.objects.get(pk=riddle_id)
-        sudoku = Sudoku(riddle)
-    except Sudoku.DoesNotExist:
+        sudoku = Sudoku.objects.get(pk=sudoku_number)
+    except Riddle.DoesNotExist:
         raise Http404("Sudoku does not exist")
 
-    context = sudoku.get_context(request.user)
+    context = sudoku.riddle.get_context(request.user)
     context.update({
         'box_rows': sudoku.box_rows,
     })
@@ -62,10 +61,10 @@ def rest_create(request: HttpRequest) -> JsonResponse:
     if error:
         return JsonResponse({'error': error})
 
-    created = Sudoku(solution=solution,
-                     pattern=pattern,
-                     state=pattern,
-                     difficulty=5,
-                     box_rows=3)
-    created.save()
-    return JsonResponse({'pk': created.pk})
+    riddle = Riddle(solution=solution,
+                    pattern=pattern,
+                    state=pattern,
+                    difficulty=5,
+                    box_rows=3)
+    riddle.save()
+    return JsonResponse({'pk': riddle.pk})
