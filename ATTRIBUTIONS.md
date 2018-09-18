@@ -27,7 +27,8 @@
 | jedi                  | 0.12.1    | MIT License                                         | David Halter                              | https://github.com/davidhalter/jedi                       |
 | lazy-object-proxy     | 1.3.1     | BSD License                                         | Ionel Cristian Mărieș                     | https://github.com/ionelmc/python-lazy-object-proxy       |
 | mccabe                | 0.6.1     | MIT License                                         | Ian Cordasco                              | https://github.com/pycqa/mccabe                           |
-| mypy                  | 0.620     | MIT License                                         | Jukka Lehtosalo                           | http://www.mypy-lang.org/                                 |
+| mypy                  | 0.630     | MIT License                                         | Jukka Lehtosalo                           | http://www.mypy-lang.org/                                 |
+| mypy-extensions       | 0.4.1     | MIT License                                         | The mypy developers                       | http://www.mypy-lang.org/                                 |
 | packaging             | 17.1      | Apache Software License, BSD License                | Donald Stufft and individual contributors | https://github.com/pypa/packaging                         |
 | parso                 | 0.3.1     | MIT License                                         | David Halter                              | https://github.com/davidhalter/parso                      |
 | pbr                   | 4.2.0     | Apache Software License                             | OpenStack                                 | https://docs.openstack.org/pbr/latest/                    |
@@ -45,7 +46,7 @@
 | pylint                | 2.1.1     | GNU General Public License (GPL)                    | Python Code Quality Authority             | https://github.com/PyCQA/pylint                           |
 | pylint-django         | 2.0.2     | UNKNOWN                                             | landscape.io                              | https://github.com/PyCQA/pylint-django                    |
 | pylint-plugin-utils   | 0.4       | UNKNOWN                                             | landscape.io                              | https://github.com/landscapeio/pylint-plugin-utils        |
-| pyparsing             | 2.2.0     | MIT License                                         | Paul McGuire                              | http://pyparsing.wikispaces.com/                          |
+| pyparsing             | 2.2.1     | MIT License                                         | Paul McGuire                              | https://github.com/pyparsing/pyparsing/                   |
 | pytz                  | 2018.5    | MIT License                                         | Stuart Bishop                             | http://pythonhosted.org/pytz                              |
 | requests              | 2.19.1    | Apache Software License                             | Kenneth Reitz                             | http://python-requests.org                                |
 | requirements-detector | 0.6       | MIT License                                         | landscape.io                              | https://github.com/landscapeio/requirements-detector      |
@@ -53,7 +54,7 @@
 | sauceclient           | 1.0.0     | Apache Software License                             | Corey Goldberg                            | https://github.com/cgoldberg/sauceclient                  |
 | selenium              | 3.14.0    | Apache Software License                             | UNKNOWN                                   | https://github.com/SeleniumHQ/selenium/                   |
 | setoptconf            | 0.2.0     | MIT License                                         | Jason Simeone                             | https://github.com/jayclassless/setoptconf                |
-| setuptools            | 40.2.0    | MIT License                                         | Python Packaging Authority                | https://github.com/pypa/setuptools                        |
+| setuptools            | 40.4.1    | MIT License                                         | Python Packaging Authority                | https://github.com/pypa/setuptools                        |
 | six                   | 1.11.0    | MIT License                                         | Benjamin Peterson                         | http://pypi.python.org/pypi/six/                          |
 | smmap2                | 2.0.4     | BSD License                                         | Sebastian Thiel                           | https://github.com/gitpython-developers/smmap             |
 | snowballstemmer       | 1.2.1     | BSD License                                         | Yoshiki Shibukawa                         | https://github.com/shibukawa/snowball_py                  |
