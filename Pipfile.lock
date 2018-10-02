@@ -377,11 +377,10 @@
         },
         "pylama": {
             "hashes": [
-                "sha256:390c1dab1daebdf3d6acc923e551b035c3faa77d8b96b98530c230493f9ec712",
-                "sha256:a3670459e7855529e2ccd3959e0bdebd694ac62bcdc7c58a877f3456c0a2058b"
+                "sha256:779c2377a4627b0e0b65818c6ee3a2ec54835a84a96713129e7b4affb87f2a67",
+                "sha256:db15baddbb2d79e0911058d3e0fd53029ebf5aab00991ef71329bffe879a05f3"
             ],
-            "index": "pypi",
-            "version": "==7.4.3"
+            "version": "==7.5.0"
         },
         "pylint": {
             "hashes": [
