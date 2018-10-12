@@ -347,12 +347,11 @@
         },
         "ptpython": {
             "hashes": [
-                "sha256:9c801a5a65ba589609f193e7e20719d442153bec87d3cd1e72e065cfd4d89c06",
-                "sha256:a42818ee1c7ae7e1493a7d2ce37e60633467aabf82e594c0480127840531bf3e",
-                "sha256:bfd39f484e6ed3f47b418b4beb82e34adc956bf425ba60cc6b2951baa5a900ce"
+                "sha256:0a0a54b848495998032b053d655f2ac904ac97ca084f5185d096764a0a57c0eb",
+                "sha256:493ba3dc0e61dbdd399f72f3edb1fcda5addecfeb0358a90fdfb614bb97b29e7",
+                "sha256:8b8b65a8013f78d6f1599b462468ee7ec5511d509b480f02271d10623be72eab"
             ],
-            "index": "pypi",
-            "version": "==2.0.2"
+            "version": "==2.0.3"
         },
         "pycodestyle": {
             "hashes": [
