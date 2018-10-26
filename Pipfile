@@ -18,7 +18,7 @@ dparse = {version = "*", extras = ["pipenv"]}
 flake8 = "*"
 mypy = "*"
 pip-licenses = "*"
-prospector = "*"
+# prospector = "*"
 ptpython = "*"
 pylama = "*"
 pylint = "*"
