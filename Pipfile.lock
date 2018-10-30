@@ -317,12 +317,11 @@
         },
         "ptpython": {
             "hashes": [
-                "sha256:0a0a54b848495998032b053d655f2ac904ac97ca084f5185d096764a0a57c0eb",
-                "sha256:493ba3dc0e61dbdd399f72f3edb1fcda5addecfeb0358a90fdfb614bb97b29e7",
-                "sha256:8b8b65a8013f78d6f1599b462468ee7ec5511d509b480f02271d10623be72eab"
+                "sha256:51a74abe931f692360a32d650c2ba1ca329c08f3ed9b1de8abcd1164e0b0a6a7",
+                "sha256:938ee050e37d61c138dbbeb21383dfef8b9ed4ffb453a5f34041f42025bf5042",
+                "sha256:ebe9d68ea7532ec8ab306d4bdc7ec393701cd9bbd6eff0aa3067c821f99264d4"
             ],
-            "index": "pypi",
-            "version": "==2.0.3"
+            "version": "==2.0.4"
         },
         "pycodestyle": {
             "hashes": [
