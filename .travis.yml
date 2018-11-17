@@ -1,6 +1,7 @@
 language: python
 python:
-  - 3.7-dev
+  - "3.7"
+dist: xenial
 install:
   - pip install pipenv
   - pipenv install --dev
@@ -13,7 +14,8 @@ addons:
 script:
   - pipenv run coverage
   - pipenv run coverage xml
-  - pipenv run mypy -p base -p riddles -p sudoku -p slither
+  - >-
+    pipenv run mypy -p base -p riddles -p sudoku -p slither
   - pipenv run flake8
 after_success:
   - pipenv run codecov
