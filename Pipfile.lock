@@ -319,12 +319,11 @@
         },
         "pipenv": {
             "hashes": [
-                "sha256:117b0015837578cef25ee09c9d38094245966cbff92f0984e0f0fbebdbb5bc75",
-                "sha256:5f760d35de14982353437442d0d2c474bee139ffd69c01148abc11509f6422da",
-                "sha256:7e4b827307e6070468284caa332fcba9c60e532afd2a8ff4c0d6df8be6b9fadb"
+                "sha256:7df8e33a2387de6f537836f48ac6fcd94eda6ed9ba3d5e3fd52e35b5bc7ff49e",
+                "sha256:56ad5f5cb48f1e58878e14525a6e3129d4306049cb76d2f6a3e95df0d5fc6330",
+                "sha256:a673e606e8452185e9817a987572b55360f4d28b50831ef3b42ac3cab3fee846"
             ],
-            "markers": "extra == 'pipenv'",
-            "version": "==2018.11.14"
+            "version": "==2018.11.26"
         },
         "prompt-toolkit": {
             "hashes": [
