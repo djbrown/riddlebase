@@ -1,10 +1,10 @@
-from django.contrib.auth import logout as do_logout
 from django.shortcuts import render
+
+from riddles.models import RiddleCategory
 
 
 def index(request):
-    return render(request, 'index.html')
-
-
-def logout(request):
-    return do_logout(request)
+    context = {
+        'category_list': RiddleCategory.objects.all()
+    }
+    return render(request, 'index.html', context)

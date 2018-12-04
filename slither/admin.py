@@ -1,5 +1,5 @@
 from django.contrib import admin
 
-from slither.models import *
+from . import models
 
-admin.site.register(Slither)
+admin.site.register(models.Slither)

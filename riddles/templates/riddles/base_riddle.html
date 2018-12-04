@@ -8,7 +8,7 @@
     {{ block.super }}
     <script src="{% static 'riddles/js/riddle-manager.js' %}"></script>
 {% endblock %}
-{% block body %}
+{% block content %}
     {{ block.super }}
     <h1>{{ riddle_type }} {{ riddle_id }}</h1>
     <div class="gap-bot">

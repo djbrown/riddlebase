@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block title %}Slither Links{% endblock %}
-{% block body %}
+{% block content %}
     <h1>Slither Links</h1>
     <a href="{% url 'riddles:slither:creator' %}" class="btn btn-primary">Create Slither Link</a>
     <h2>There are {{ ids|length }} Slither Links</h2>

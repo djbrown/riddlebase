@@ -1,24 +1,25 @@
-from django.http import Http404, JsonResponse, HttpRequest, HttpResponse
+from django.http import Http404, HttpRequest, HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 
+from riddles.models import Riddle
 from sudoku.models import Sudoku
 
 
 def view_index(request) -> HttpResponse:
     return render(request, 'sudoku/index.html', {
-        'ids': list(sudoku.id for sudoku in Sudoku.objects.all()),
+        'pks': list(sudoku.pk for sudoku in Riddle.objects.filter(riddle_type__name='sudoku')),
     })
 
 
-def view_riddle(request: HttpRequest, riddle_id: int) -> HttpResponse:
+def view_riddle(request: HttpRequest, sudoku_number: int) -> HttpResponse:
     try:
-        sudoku = Sudoku.objects.get(pk=riddle_id)
-    except Sudoku.DoesNotExist:
+        sudoku = Sudoku.objects.get(pk=sudoku_number)
+    except Riddle.DoesNotExist:
         raise Http404("Sudoku does not exist")
 
-    context = sudoku.get_context(request.user)
+    context = sudoku.riddle.get_context(request.user)
     context.update({
         'box_rows': sudoku.box_rows,
     })
@@ -60,10 +61,10 @@ def rest_create(request: HttpRequest) -> JsonResponse:
     if error:
         return JsonResponse({'error': error})
 
-    created = Sudoku(solution=solution,
-                     pattern=pattern,
-                     state=pattern,
-                     difficulty=5,
-                     box_rows=3)
-    created.save()
-    return JsonResponse({'id': created.id})
+    riddle = Riddle(solution=solution,
+                    pattern=pattern,
+                    state=pattern,
+                    difficulty=5,
+                    box_rows=3)
+    riddle.save()
+    return JsonResponse({'pk': riddle.pk})

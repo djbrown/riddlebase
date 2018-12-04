@@ -45,7 +45,9 @@ Also make sure to check messages from the following commands before proposing:
 
 ### Testing
 
-Run tests: `pipenv run test`
+Run tests: `pipenv run test`<br/>
+Run coverage: `pipenv run coverage`
+
 
 #### Test Modules
 * A test module is a module that tests a single source module.
