@@ -350,10 +350,10 @@
         },
         "ptpython": {
             "hashes": [
-                "sha256:0977f56c934789d9955839ef71268148858f826fda49b267cb377ac7501a897b",
-                "sha256:90e24040e82de4abae0bbe6e352d59ae6657e14e1154e742c0038679361b052f"
+                "sha256:9746e406d841a7313a9115adde5654bfdb766284cf613f2c9536862222a97caa",
+                "sha256:ac2f67f65c1b6160b0af343293efc1df08e8438f03b1170b914a856bf49bb1e0"
             ],
-            "version": "==2.0.6"
+            "version": "==3.0.0"
         },
         "pycodestyle": {
             "hashes": [
