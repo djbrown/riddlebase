@@ -178,15 +178,11 @@
             "version": "==0.6.2"
         },
         "dparse": {
-            "extras": [
-                "pipenv"
-            ],
             "hashes": [
-                "sha256:00a5fdfa900629e5159bf3600d44905b333f4059a3366f28e0dbd13eeab17b19",
-                "sha256:cef95156fa0adedaf042cd42f9990974bec76f25dfeca4dc01f381a243d5aa5b"
+                "sha256:a1b5f169102e1c894f9a7d5ccf6f9402a836a5d24be80a986c7ce9eaed78f367",
+                "sha256:e953a25e44ebb60a5c6efc2add4420c177f1d8404509da88da9729202f306994"
             ],
-            "index": "pypi",
-            "version": "==0.4.1"
+            "version": "==0.5.1"
         },
         "entrypoints": {
             "hashes": [
