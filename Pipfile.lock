@@ -461,11 +461,8 @@
             "version": "==1.15.0"
         },
         "smmap2": {
-            "hashes": [
-                "sha256:0555a7bf4df71d1ef4218e4807bbf9b201f910174e6e08af2e138d4e517b4dde",
-                "sha256:29a9ffa0497e7f2be94ca0ed1ca1aa3cd4cf25a1f6b4f5f87f74b46ed91d609a"
-            ],
-            "version": "==2.0.5"
+            "hashes": [],
+            "version": "==3.0.0"
         },
         "snowballstemmer": {
             "hashes": [
