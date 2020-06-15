@@ -201,11 +201,8 @@
             "version": "==3.8.3"
         },
         "gitdb2": {
-            "hashes": [
-                "sha256:1b6df1433567a51a4a9c1a5a0de977aa351a405cc56d7d35f3388bad1f630350",
-                "sha256:96bbb507d765a7f51eb802554a9cfe194a174582f772e0d89f4e87288c288b7b"
-            ],
-            "version": "==2.0.6"
+            "hashes": [],
+            "version": "==4.0.1"
         },
         "gitpython": {
             "hashes": [
