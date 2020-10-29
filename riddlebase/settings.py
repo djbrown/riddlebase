@@ -1,10 +1,14 @@
-import os
+from pathlib import Path
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 
 SECRET_KEY = ' '
 
 DEBUG = True
+
+
+# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -50,12 +54,18 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'riddlebase.wsgi.application'
 
+
+# Database
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+
+# Password validation
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -72,6 +82,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
+# Internationalization
+
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -82,25 +95,10 @@ USE_L10N = True
 
 USE_TZ = True
 
-STATIC_ROOT = os.path.abspath(os.path.join(BASE_DIR, 'static-collected'))
+
+# Media
 
 STATIC_URL = '/static/'
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-]
-
-EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-
-EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'mails')
-
-
-# Auth
-
-LOGIN_REDIRECT_URL = 'users:profile'
-
-LOGIN_URL = 'users:login'
-
 
 # Custom Settings
 
