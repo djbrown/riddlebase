@@ -1,5 +1,0 @@
-schedule: "every two weeks"
-search: false
-requirements:
-  - Pipfile
-  - Pipfile.lock

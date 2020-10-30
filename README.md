@@ -20,23 +20,23 @@ RiddleBase is powered by Django
 
 ## Running via Docker
 
-`docker run -p 8001:8000 djbrown/riddlebase`<br/>
-Container is reachable under [0.0.0.0:8001](http://0.0.0.0:8001)
+`docker run -p 8000:8000 djbrown/riddlebase`<br/>
+Container is reachable under [127.0.0.1:8000](http://127.0.0.1:8000)
 
 
 ## Running natively
 
 ### Requirements
-1. Python 3.7
-2. pipenv (`pip install pipenv`)
+1. Python 3.8 (easy via [pyenv](https://github.com/pyenv/pyenv/))
+2. [poetry](https://github.com/python-poetry/poetry)
 
 
 ### Installation
-`pipenv install`<br/>
-`pipenv run python manage.py migrate`
+`poetry install`<br/>
+`poetry run ./manage.py migrate`
 
 ### Start Application
-`pipenv run python manage.py runserver`
+`poetry run ./manage.py runserver`
 
 
 ## License

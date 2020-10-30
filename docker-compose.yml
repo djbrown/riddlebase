@@ -2,8 +2,10 @@ version: '3'
 
 services:
   web:
-    build: .
+    build:
+      context: ./
+      target: development
     volumes:
-      - .:/code
+      - ./:/code/
     ports:
-      - "80:8000"
+      - "8000:8000"

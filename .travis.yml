@@ -1,25 +1,29 @@
 language: python
-python:
-  - "3.7"
+os: linux
 dist: xenial
+python:
+  - 3.8
 install:
-  - pip install pipenv
-  - pipenv install --dev
-  - >-
-    curl -H 'Cache-Control: no-cache'
-    https://raw.githubusercontent.com/fossas/fossa-cli/master/install.sh | sudo
-    bash
-addons:
-  sauce_connect: true
-script:
-  - pipenv run coverage
-  - pipenv run coverage xml
-  - >-
-    pipenv run mypy -p base -p riddles -p sudoku -p slither
-  - pipenv run flake8
-after_success:
-  - pipenv run codecov
-  - pipenv run coveralls
-  - pipenv run python-codacy-coverage -r coverage.xml
-  - diff ATTRIBUTIONS.md <(pipenv run pip-licenses -csaum)
-  - pipenv lock -r > requirements.txt && fossa
+  - poetry install
+jobs:
+  include:
+    - name: Unit Tests & Analysis
+      before_script:
+        - "curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/fossas/fossa-cli/master/install.sh | sudo bash"
+        - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+        - chmod +x ./cc-test-reporter
+        - ./cc-test-reporter before-build
+        - poetry export --dev -o requirements.txt 
+      script:
+        - poetry run coverage
+        - poetry run mypy .
+        - poetry run flake8
+        - diff ATTRIBUTIONS.csv <(poetry run pip-licenses -au --from classifier -f csv)
+        - safety check
+      after_script:
+        - poetry run coverage xml
+        - poetry run codecov
+        - poetry run coveralls
+        - poetry run python-codacy-coverage -r coverage.xml
+        - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+        - fossa analyze
