@@ -7,7 +7,7 @@
 [![Codacy Quality Status](https://api.codacy.com/project/badge/Grade/9c0920594c0544d9b63caf9fab3970d8)](https://www.codacy.com/app/djbrown/riddlebase?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=djbrown/riddlebase&amp;utm_campaign=Badge_Grade)
 [![Mypy Badge](http://www.mypy-lang.org/static/mypy_badge.svg)](http://mypy-lang.org/)
 [![Sauce Test Status](https://saucelabs.com/buildstatus/djbrown-riddlebase)](https://saucelabs.com/u/djbrown-riddlebase)
-[![FOSSA License Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fdjbrown%2Friddlebase.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fdjbrown%2Friddlebase?ref=badge_shield)
+[![FOSSA License Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fdjbrown%2Friddlebase.svg?type=shield)](https://app.fossa.com/projects/custom%2B5488%2Fgithub.com%2Fdjbrown%2Friddlebase?ref=badge_shield)
 
 [![Sauce Labs Browsers](https://saucelabs.com/browser-matrix/djbrown-riddlebase.svg)](https://saucelabs.com/u/djbrown-riddlebase)
 
@@ -43,8 +43,7 @@ Container is reachable under [127.0.0.1:8000](http://127.0.0.1:8000)
 
 The project is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
 
-[![FOSSA License Report](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fdjbrown%2Friddlebase.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fdjbrown%2Friddlebase?ref=badge_large)
-
+[![FOSSA License Report](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fdjbrown%2Friddlebase.svg?type=large)](https://app.fossa.com/projects/custom%2B5488%2Fgithub.com%2Fdjbrown%2Friddlebase?ref=badge_large)
 
 ## Contributing
 See [CONTRIBUTING.md](.github/CONTRIBUTING.md)
