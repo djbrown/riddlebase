@@ -42,7 +42,7 @@ Container is reachable under [127.0.0.1:8000](http://127.0.0.1:8000)
 
 The project is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
 
-[![FOSSA License Report](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fdjbrown%2Friddlebase.svg?type=large)](https://app.fossa.com/projects/custom%2B5488%2Fgithub.com%2Fdjbrown%2Friddlebase?ref=badge_large)
+[![FOSSA License Report](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fdjbrown%2Friddlebase.svg?type=large)](https://app.fossa.com/projects/custom%2B5488%2Fgithub.com%2Fdjbrown%2Friddlebase?ref=badge_large)
 
 ## Contributing
 See [CONTRIBUTING.md](.github/CONTRIBUTING.md)
