@@ -31,7 +31,6 @@ codecov = "^2.1.10"
 coveralls = "^2.1.2"
 safety = "^1.9.0"
 dparse = "^0.5.1"
-pip-licenses = "^3.0.0"
 ptpython = "^3.0.7"
 
 [build-system]
@@ -42,5 +41,4 @@ build-backend = "poetry.core.masonry.api"
 riddlebase  = "./manage.py runserver"
 test        = "./manage.py test"
 coverage    = "coverage run --branch --source=. --omit=*/migrations/* ./manage.py test"
-attributions = { shell = "pip-licenses -au --from classifier -f csv > ATTRIBUTIONS.csv" }
 delmig = { shell = "find . -path \"*/migrations/*.py\" -not -name \"__init__.py\" -delete" }

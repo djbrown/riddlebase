@@ -14,7 +14,6 @@ You should choose one of the [Issue Templates](https://github.com/djbrown/riddle
 
 ## Package Management
 If you want to add new dependencies to the project, make sure their license is compatible with the MIT license.
-You can automatically generate attributions via `poetry run poe attributions`
 
 This Project uses [Poetry](https://github.com/python-poetry/poetry) for managing Python Packages.<br />
 Install new dependencies from pypi via `poetry add <PACKAGE>`.
