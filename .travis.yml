@@ -20,7 +20,7 @@ jobs:
         - poetry run mypy .
         - poetry run flake8
         - diff ATTRIBUTIONS.csv <(poetry run pip-licenses -au --from classifier -f csv)
-        - safety check
+        - safety check -r requirements.txt
       after_script:
         - poetry run coverage xml
         - poetry run codecov
