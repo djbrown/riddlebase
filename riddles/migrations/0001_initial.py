@@ -39,7 +39,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('solution', models.TextField()),
                 ('pattern', models.TextField()),
-                ('difficulty', models.PositiveSmallIntegerField(validators=[django.core.validators.MinValueValidator(1), django.core.validators.MaxValueValidator(10)])),
+                ('difficulty', models.PositiveSmallIntegerField(blank=True, null=True, validators=[django.core.validators.MinValueValidator(1), django.core.validators.MaxValueValidator(10)])),
                 ('created_on', models.DateTimeField(auto_now_add=True)),
                 ('modified_on', models.DateTimeField(auto_now=True)),
                 ('riddle_type', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='riddles.riddletype')),
