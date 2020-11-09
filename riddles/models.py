@@ -8,10 +8,14 @@ from riddles import util
 
 class RiddleCategory(models.Model):
     name = models.CharField(max_length=100, unique=True)
-    super_category = models.ForeignKey('self', on_delete=models.CASCADE)
+    parent = models.ForeignKey('self', blank=True, null=True, on_delete=models.CASCADE)
     description = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     modified_on = models.DateTimeField(auto_now=True)
+
+    def clean(self):
+        if self.parent == self:
+            raise ValidationError('You cannot set the parent to the object itself.')
 
     def __str__(self):
         return "RiddleCategory: {}".format(self.name)
@@ -32,7 +36,7 @@ class Riddle(models.Model):
     riddle_type = models.ForeignKey(RiddleType, on_delete=models.CASCADE)
     solution = models.TextField()
     pattern = models.TextField()
-    difficulty = models.IntegerField(validators=[
+    difficulty = models.PositiveSmallIntegerField(validators=[
         MinValueValidator(1),
         MaxValueValidator(10)])
     created_on = models.DateTimeField(auto_now_add=True)
@@ -57,10 +61,6 @@ class Riddle(models.Model):
         if not util.is_square(pat_len):
             raise ValidationError('Riddle value length is not square.')
 
-    @staticmethod
-    def check_solution(pattern: str, solution: str) -> bool:
-        raise NotImplementedError()
-
     def get_or_create_state(self, user: User) -> str:
         state_values = self.pattern
         if user.is_authenticated():
@@ -79,8 +79,8 @@ class Riddle(models.Model):
             "riddle_type": self.riddle_type.name,
             "pattern": self.pattern,
             "state": self.get_or_create_state(user),
-            'previous_id': self.previous_id(),
-            'next_id': self.next_id(),
+            'previous_id': self.previous_pk(),
+            'next_id': self.next_pk(),
         }
 
     def __str__(self):
