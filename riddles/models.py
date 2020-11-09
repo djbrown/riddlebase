@@ -10,8 +10,6 @@ class RiddleCategory(models.Model):
     name = models.CharField(max_length=100, unique=True)
     parent = models.ForeignKey('self', blank=True, null=True, on_delete=models.CASCADE)
     description = models.TextField()
-    created_on = models.DateTimeField(auto_now_add=True)
-    modified_on = models.DateTimeField(auto_now=True)
 
     def clean(self):
         if self.parent == self:
@@ -25,8 +23,6 @@ class RiddleType(models.Model):
     name = models.CharField(max_length=100, unique=True)
     description = models.TextField()
     category = models.ForeignKey(RiddleCategory, on_delete=models.CASCADE)
-    created_on = models.DateTimeField(auto_now_add=True)
-    modified_on = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return "RiddleType: {}".format(self.name)
@@ -91,7 +87,6 @@ class RiddleState(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     riddle = models.ForeignKey(Riddle, on_delete=models.CASCADE)
     value = models.TextField()
-    created_on = models.DateTimeField(auto_now_add=True)
     modified_on = models.DateTimeField(auto_now=True)
 
     class Meta:
