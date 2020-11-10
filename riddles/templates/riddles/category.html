@@ -4,4 +4,9 @@
 
 {% block content %}
 <h1>{{ category.name }}</h1>
+<ul>
+    {% for riddle_type in category.riddletype_set.all %}
+    <li><a href="{% url 'riddles:riddle-type' riddle_type.id %}">{{ riddle_type.name }}</a></li>
+    {% endfor %}
+</ul>
 {% endblock %}

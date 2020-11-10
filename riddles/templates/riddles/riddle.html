@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ riddle.riddle_type.name }} {{ riddle.id }}{% endblock %}
+
+{% block content %}
+<h1>{{ riddle.riddle_type.name }} {{ riddle.id }}</h1>
+<textarea>{{ riddle.pattern }}</textarea>
+<input type="submit" />
+{% endblock %}

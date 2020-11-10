@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ category.name }}{% endblock %}
+
+{% block content %}
+<h1>{{ riddle_type.name }}</h1>
+<ul>
+    {% for riddle in riddle_type.riddle_set.all %}
+    <li><a href="{% url 'riddles:riddle' riddle.id %}">{{ riddle.id }}</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}
