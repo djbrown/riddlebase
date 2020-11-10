@@ -38,9 +38,6 @@ class Riddle(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     modified_on = models.DateTimeField(auto_now=True)
 
-    # Todo: add field "created:Time" and "creator:User"
-    # Todo: store local copy of included frameworks: bootstrap and jquery
-
     def previous_pk(self):
         previous_set = Riddle.objects.filter(pk__lt=self.pk).order_by('-pk')
         return previous_set[0].pk if previous_set else None

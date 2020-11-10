@@ -18,10 +18,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'base',
-    'users',
+    # 'users',
     'riddles',
-    'sudoku',
-    'slither',
+    # 'sudoku',
+    # 'slither',
 ]
 
 MIDDLEWARE = [
