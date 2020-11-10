@@ -4,6 +4,10 @@
 
 {% block content %}
 <h1>{{ riddle.riddle_type.name }} {{ riddle.id }}</h1>
-<textarea>{{ riddle.pattern }}</textarea>
-<input type="submit" />
+<form method="post">
+    {% csrf_token %}
+    <textarea name="state" rows="8" cols="15">{{ state }}</textarea>
+    <input type="submit" />
+    <input type="submit" name="revert" value="revert" />
+</form>
 {% endblock %}
