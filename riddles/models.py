@@ -32,7 +32,7 @@ class Riddle(models.Model):
     riddle_type = models.ForeignKey(RiddleType, on_delete=models.CASCADE)
     solution = models.TextField()
     pattern = models.TextField()
-    difficulty = models.PositiveSmallIntegerField(validators=[
+    difficulty = models.PositiveSmallIntegerField(blank=True, null=True, validators=[
         MinValueValidator(1),
         MaxValueValidator(10)])
     created_on = models.DateTimeField(auto_now_add=True)
