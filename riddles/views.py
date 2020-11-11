@@ -1,8 +1,8 @@
 import datetime
 
 from django.conf import settings
-from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render
+from django.http import Http404, HttpRequest, HttpResponse
+from django.shortcuts import get_object_or_404, render
 
 from .models import Riddle, RiddleCategory, RiddleType
 
@@ -11,22 +11,22 @@ def index(request: HttpRequest) -> HttpResponse:
     return render(request, 'riddles/index.html')
 
 
-def category(request: HttpRequest, id: int) -> HttpResponse:
-    riddle_category = RiddleCategory.objects.get(id=id)
+def category(request: HttpRequest, pk: int) -> HttpResponse:
+    riddle_category = get_object_or_404(RiddleCategory, pk=pk)
     return render(request, 'riddles/category.html', {
         "category": riddle_category,
     })
 
 
-def riddle_type(request: HttpRequest, id: int) -> HttpResponse:
-    _riddle_type = RiddleType.objects.get(id=id)
+def riddle_type(request: HttpRequest, pk: int) -> HttpResponse:
+    _riddle_type = get_object_or_404(RiddleType, pk=pk)
     return render(request, 'riddles/type.html', {
         "riddle_type": _riddle_type,
     })
 
 
-def riddle(request: HttpRequest, id: int) -> HttpResponse:
-    riddle = Riddle.objects.get(id=id)
+def riddle(request: HttpRequest, pk: int) -> HttpResponse:
+    riddle = get_object_or_404(Riddle, pk=pk)
     context = {
         'riddle': riddle,
     }

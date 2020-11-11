@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}{{ riddle.riddle_type.name }} {{ riddle.id }}{% endblock %}
+{% block title %}{{ riddle.riddle_type.name }} {{ riddle.pk }}{% endblock %}
 
 {% block styles %}
 {{ block.super }}
@@ -15,9 +15,9 @@
 {% endblock %}
 
 {% block content %}
-<a href="{% url 'riddles:category' riddle.riddle_type.category.id %}">{{ riddle.riddle_type.category.name }}</a><br />
-<a href="{% url 'riddles:type' riddle.riddle_type.id %}">{{ riddle.riddle_type.name }}</a>
-<h1>{{ riddle.riddle_type.name }} {{ riddle.id }}</h1>
+<a href="{% url 'riddles:category' riddle.riddle_type.category.pk %}">{{ riddle.riddle_type.category.name }}</a><br />
+<a href="{% url 'riddles:type' riddle.riddle_type.pk %}">{{ riddle.riddle_type.name }}</a>
+<h1>{{ riddle.riddle_type.name }} {{ riddle.pk }}</h1>
 <a href="">Prev</a>
 <a href="">Next</a>
 <form method="post" class="{% if incorrect %}incorrect{% endif %}{% if correct %}correct{% endif %}">
@@ -56,7 +56,7 @@
 {% block endscripts %}
 {{ block.super }}
 <script>
-    Riddle.init("{{ riddle.pattern|escapejs }}", "{{ state|escapejs }}", parseInt("{{ box_rows }}"));
+    Riddle.init("{{ riddle.pattern }}", "{{ state }}");
     RiddleManager.init();
     RiddleManager.adjustViewBox();
     RiddleManager.resetZoom();

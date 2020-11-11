@@ -3,11 +3,11 @@
 {% block title %}{{ riddle_type.name }}{% endblock %}
 
 {% block content %}
-<a href="{% url 'riddles:category' riddle_type.category.id %}">{{ riddle_type.category.name }}</a>
+<a href="{% url 'riddles:category' riddle_type.category.pk %}">{{ riddle_type.category.name }}</a>
 <h1>{{ riddle_type.name }}</h1>
 <ul>
     {% for riddle in riddle_type.riddle_set.all %}
-    <li><a href="{% url 'riddles:riddle' riddle.id %}">{{ riddle.id }}</a></li>
+    <li><a href="{% url 'riddles:riddle' riddle.pk %}">{{ riddle.pk }}</a></li>
     {% endfor %}
 </ul>
 {% endblock %}
