@@ -66,16 +66,6 @@ class Riddle(models.Model):
                 state_values = state.values
         return state_values
 
-    def get_context(self, user: User) -> dict:
-        return {
-            "riddle_id": self.pk,
-            "riddle_type": self.riddle_type.name,
-            "pattern": self.pattern,
-            "state": self.get_or_create_state(user),
-            'previous_id': self.previous_pk(),
-            'next_id': self.next_pk(),
-        }
-
     def __str__(self):
         return "Riddle: {} {}".format(self.riddle_type.name, self.pk)
 
