@@ -1,5 +1,5 @@
-const RIDDLE_CELL_SIZE = 30;
-const PICKER_CELL_SIZE = 25;
+export const RIDDLE_CELL_SIZE = 30;
+export const PICKER_CELL_SIZE = 25;
 const OFFSET = 2;
 const DEFAULT_ZOOM_FACTOR = 1.4;
 
@@ -26,7 +26,7 @@ function setZoomFactor(newZoomFactor) {
     applyZoom();
 }
 
-function resetZoom() {
+export function resetZoom() {
     setZoomFactor(DEFAULT_ZOOM_FACTOR);
 }
 
@@ -46,12 +46,12 @@ function initUserControls() {
     // TODO: init user controls (save, restore, comment, rate)
 }
 
-function init() {
+export function init() {
     const zoomDelta = 0.2;
 
     document.getElementById("shrink").addEventListener("click", createSetZoomDeltaFunction(-zoomDelta));
-    document.getElementById("restore-size").addEventListener("click", resetZoom);
     document.getElementById("enlarge").addEventListener("click", createSetZoomDeltaFunction(zoomDelta));
+    document.getElementById("restore-size").addEventListener("click", resetZoom);
     document.getElementById("full-screen").addEventListener("click", toggleFullScreen);
 
     if (document.getElementById("save") !== null) {
@@ -59,7 +59,7 @@ function init() {
     }
 }
 
-function adjustViewBox() {
+export function adjustViewBox() {
     const svg = document.getElementById("riddle");
     //noinspection JSUnresolvedFunction
     const bBox = svg.getBBox();
@@ -72,11 +72,11 @@ function adjustViewBox() {
     svg.setAttribute("viewBox", `${x} ${y} ${width} ${height}`);
 }
 
-function createSvgElement(qualifiedName) {
+export function createSvgElement(qualifiedName) {
     return document.createElementNS("http://www.w3.org/2000/svg", qualifiedName);
 }
 
-function check(state, correctFallbackFunction) {
+export function check(state, correctFallbackFunction) {
     const ajax = new XMLHttpRequest();
     ajax.onreadystatechange = function () {
         if (ajax.readyState === 4 && ajax.status === 200) {
@@ -90,13 +90,3 @@ function check(state, correctFallbackFunction) {
     ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     ajax.send(`state=${state}`);
 }
-
-export {
-    RIDDLE_CELL_SIZE,
-    PICKER_CELL_SIZE,
-    init,
-    resetZoom,
-    adjustViewBox,
-    createSvgElement,
-    check
-};
