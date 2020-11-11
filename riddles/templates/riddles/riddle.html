@@ -1,13 +1,24 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}{{ riddle.riddle_type.name }} {{ riddle.id }}{% endblock %}
 
+{% block styles %}
+<link rel="stylesheet" href="{% static 'riddles/css/riddle.css' %}">
+{% endblock styles %}
+
 {% block content %}
+<a href="{% url 'riddles:category' riddle.riddle_type.category.id %}">{{ riddle.riddle_type.category.name }}</a><br />
+<a href="{% url 'riddles:type' riddle.riddle_type.id %}">{{ riddle.riddle_type.name }}</a>
 <h1>{{ riddle.riddle_type.name }} {{ riddle.id }}</h1>
-<form method="post">
+<a href="">Prev</a>
+<a href="">Next</a>
+<form method="post" class="{% if incorrect %}incorrect{% endif %}{% if correct %}correct{% endif %}">
     {% csrf_token %}
-    <textarea name="state" rows="8" cols="15">{{ state }}</textarea>
-    <input type="submit" />
-    <input type="submit" name="revert" value="revert" />
+    <textarea id="riddle" name="state" rows="8" cols="15">{{ state }}</textarea>
+    <div>
+        <input type="submit" name="check" value="check" />
+        <input type="submit" name="revert" value="revert" />
+    </div>
 </form>
 {% endblock %}

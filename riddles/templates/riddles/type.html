@@ -3,6 +3,7 @@
 {% block title %}{{ category.name }}{% endblock %}
 
 {% block content %}
+<a href="{% url 'riddles:category' riddle_type.category.id %}">{{ riddle_type.category.name }}</a>
 <h1>{{ riddle_type.name }}</h1>
 <ul>
     {% for riddle in riddle_type.riddle_set.all %}

@@ -27,13 +27,21 @@ def riddle_type(request: HttpRequest, id: int) -> HttpResponse:
 
 def riddle(request: HttpRequest, id: int) -> HttpResponse:
     riddle = Riddle.objects.get(id=id)
-    state = request.session.get('state', riddle.pattern)
-    if request.method == 'POST':
-        state = request.POST.get('state', state)
-        if request.POST.get('revert'):
-            state = riddle.pattern
-        request.session['state'] = state
-    return render(request, 'riddles/riddle.html', {
+    context = {
         'riddle': riddle,
-        'state': state,
-    })
+    }
+
+    state = request.POST.get('state', request.session.get('state', riddle.pattern))
+    if request.POST.get('revert'):
+        state = riddle.pattern
+    request.session['state'] = state
+    context['state'] = state
+
+    if state == riddle.solution:
+        context['correct'] = True
+
+    if request.POST.get('check'):
+        if state != riddle.solution:
+            context['incorrect'] = True
+
+    return render(request, 'riddles/riddle.html', context)

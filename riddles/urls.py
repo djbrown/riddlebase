@@ -10,7 +10,7 @@ app_name = 'riddles'
 urlpatterns = [
     path('', views.index, name='index'),
     path('category/<int:id>/', views.category, name='category'),
-    path('type/<int:id>/', views.riddle_type, name='riddle-type'),
+    path('type/<int:id>/', views.riddle_type, name='type'),
     path('riddle/<int:id>/', views.riddle, name='riddle'),
     # path('slither/', include(slither.urls)),
     # path('sudoku/', include(sudoku.urls)),
