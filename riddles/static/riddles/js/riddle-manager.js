@@ -69,16 +69,15 @@ var RiddleManager = (function () {
         var y = -OFFSET;
         var width = bBox.width + 2 * OFFSET;
         var height = bBox.height + 2 * OFFSET;
-        var viewBox = x + " " + y + " " + width + " " + height;
 
-        svg.setAttribute("viewBox", viewBox);
+        svg.setAttribute("viewBox", `${x} ${y} ${width} ${height}`);
     }
 
     function createSvgElement(qualifiedName) {
         return document.createElementNS("http://www.w3.org/2000/svg", qualifiedName);
     }
 
-    function check(proposal, correctFallbackFunction) {
+    function check(state, correctFallbackFunction) {
         var ajax = new XMLHttpRequest();
         ajax.onreadystatechange = function () {
             if (ajax.readyState === 4 && ajax.status === 200) {
@@ -90,7 +89,7 @@ var RiddleManager = (function () {
         };
         ajax.open("POST", "check/", true);
         ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        ajax.send("proposal=" + proposal);
+        ajax.send(`state=${state}`);
     }
 
     return {

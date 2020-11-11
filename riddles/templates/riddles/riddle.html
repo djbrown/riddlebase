@@ -4,8 +4,15 @@
 {% block title %}{{ riddle.riddle_type.name }} {{ riddle.id }}{% endblock %}
 
 {% block styles %}
+{{ block.super }}
 <link rel="stylesheet" href="{% static 'riddles/css/riddle.css' %}">
 {% endblock styles %}
+
+{% block scripts %}
+{{ block.super }}
+<script src="{% static 'riddles/js/riddle-manager.js' %}"></script>
+<script src="{% static 'riddles/js/sudoku.js' %}"></script>
+{% endblock %}
 
 {% block content %}
 <a href="{% url 'riddles:category' riddle.riddle_type.category.id %}">{{ riddle.riddle_type.category.name }}</a><br />
@@ -15,10 +22,44 @@
 <a href="">Next</a>
 <form method="post" class="{% if incorrect %}incorrect{% endif %}{% if correct %}correct{% endif %}">
     {% csrf_token %}
-    <textarea id="riddle" name="state" rows="8" cols="15">{{ state }}</textarea>
+    <textarea name="state" rows="8" cols="15">{{ state }}</textarea>
     <div>
         <input type="submit" name="check" value="check" />
         <input type="submit" name="revert" value="revert" />
     </div>
 </form>
+
+<div>
+    <button id="shrink">shrink</button>
+    <button id="restore-size">restore-size</button>
+    <button id="enlarge">enlarge</button>
+    <button id="full-screen">full-screen</button>
+</div>
+
+<svg id="riddle" shape-rendering="crispEdges">
+    <g id="riddle-values"></g>
+    <g id="riddle-grid">
+        <g id="riddle-grid-thin"></g>
+        <g id="riddle-grid-bold"></g>
+    </g>
+    <g id="picker">
+        <rect id="picker-background" x="0" y="0" width="0" height="0"></rect>
+        <g id="picker-values"></g>
+        <g id="picker-grid">
+            <g id="picker-grid-inner"></g>
+            <g id="picker-grid-outer"></g>
+        </g>
+    </g>
+</svg>
+{% endblock %}
+
+{% block endscripts %}
+{{ block.super }}
+<script>
+    Riddle.init("{{ riddle.pattern|escapejs }}", "{{ state|escapejs }}", parseInt("{{ box_rows }}"));
+    RiddleManager.init();
+    RiddleManager.adjustViewBox();
+    RiddleManager.resetZoom();
+
+</script>
 {% endblock %}
