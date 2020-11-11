@@ -4,14 +4,14 @@
   "fields": {
     "name": "Number Puzzles",
     "parent": null,
-    "description": "Here you will find many thousands of number puzzles, mostly with solutions, all free of charge. Most types of puzzles can be solved online / interactively. Number puzzles mostly follow abstract rules and can be solved with logic alone. Some types of puzzles also require elementary mathematics (basic arithmetic operations)."
+    "description": ""
   }
 }, {
   "model": "riddles.riddletype",
   "pk": 1,
   "fields": {
     "name": "Sudoku",
-    "description": "Sudoku (数 独, Number Place) is a logic puzzle: A number has to be entered in each field, whereby each number must appear exactly once in each row, column and in each area. - Solve many puzzles interactively / online or print them out, with solutions, different levels of difficulty and diagram sizes, solution techniques, links, literature.",
+    "description": "",
     "category": 1
   }
 }, {
