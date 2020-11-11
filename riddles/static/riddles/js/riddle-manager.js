@@ -4,17 +4,18 @@ var RiddleManager = (function () {
     const PICKER_CELL_SIZE = 25;
     const OFFSET = 2;
     const DEFAULT_ZOOM_FACTOR = 1.4;
-    var zoomFactor = 1;
+
+    let zoomFactor = 1;
 
     function applyZoom() {
         document.getElementById("full-screen").classList.remove("active");
-        var svg = document.getElementById("riddle");
+        const svg = document.getElementById("riddle");
         svg.classList.remove("full-screen");
         //noinspection JSUnresolvedFunction
-        var bBox = svg.getBBox();
+        const bBox = svg.getBBox();
 
-        var width = bBox.width + 2 * OFFSET;
-        var svgWidth = width * zoomFactor;
+        const width = bBox.width + 2 * OFFSET;
+        const svgWidth = width * zoomFactor;
 
         svg.setAttribute("width", svgWidth.toString());
     }
@@ -38,7 +39,7 @@ var RiddleManager = (function () {
     }
 
     function toggleFullScreen() {
-        var svg = document.getElementById("riddle");
+        const svg = document.getElementById("riddle");
         svg.classList.toggle("full-screen");
         document.getElementById("full-screen").classList.toggle("active");
     }
@@ -48,7 +49,7 @@ var RiddleManager = (function () {
     }
 
     function init() {
-        var zoomDelta = 0.2;
+        const zoomDelta = 0.2;
 
         document.getElementById("shrink").addEventListener("click", createSetZoomDeltaFunction(-zoomDelta));
         document.getElementById("restore-size").addEventListener("click", resetZoom);
@@ -61,14 +62,14 @@ var RiddleManager = (function () {
     }
 
     function adjustViewBox() {
-        var svg = document.getElementById("riddle");
+        const svg = document.getElementById("riddle");
         //noinspection JSUnresolvedFunction
-        var bBox = svg.getBBox();
+        const bBox = svg.getBBox();
 
-        var x = -OFFSET;
-        var y = -OFFSET;
-        var width = bBox.width + 2 * OFFSET;
-        var height = bBox.height + 2 * OFFSET;
+        const x = -OFFSET;
+        const y = -OFFSET;
+        const width = bBox.width + 2 * OFFSET;
+        const height = bBox.height + 2 * OFFSET;
 
         svg.setAttribute("viewBox", `${x} ${y} ${width} ${height}`);
     }
@@ -78,10 +79,10 @@ var RiddleManager = (function () {
     }
 
     function check(state, correctFallbackFunction) {
-        var ajax = new XMLHttpRequest();
+        const ajax = new XMLHttpRequest();
         ajax.onreadystatechange = function () {
             if (ajax.readyState === 4 && ajax.status === 200) {
-                var response = JSON.parse(ajax.responseText);
+                const response = JSON.parse(ajax.responseText);
                 if (response.correct === true) {
                     correctFallbackFunction();
                 }
