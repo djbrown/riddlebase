@@ -37,8 +37,8 @@ class Migration(migrations.Migration):
             name='Riddle',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('solution', models.TextField()),
-                ('pattern', models.TextField()),
+                ('solution', models.CharField(max_length=1000)),
+                ('pattern', models.CharField(max_length=1000)),
                 ('difficulty', models.PositiveSmallIntegerField(blank=True, null=True, validators=[django.core.validators.MinValueValidator(1), django.core.validators.MaxValueValidator(10)])),
                 ('created_on', models.DateTimeField(auto_now_add=True)),
                 ('modified_on', models.DateTimeField(auto_now=True)),

@@ -30,8 +30,8 @@ class RiddleType(models.Model):
 
 class Riddle(models.Model):
     riddle_type = models.ForeignKey(RiddleType, on_delete=models.CASCADE)
-    solution = models.TextField()
-    pattern = models.TextField()
+    solution = models.CharField(max_length=1000)
+    pattern = models.CharField(max_length=1000)
     difficulty = models.PositiveSmallIntegerField(blank=True, null=True, validators=[
         MinValueValidator(1),
         MaxValueValidator(10)])
