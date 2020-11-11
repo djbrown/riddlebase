@@ -8,12 +8,6 @@
 <link rel="stylesheet" href="{% static 'riddles/css/riddle.css' %}">
 {% endblock styles %}
 
-{% block scripts %}
-{{ block.super }}
-<script src="{% static 'riddles/js/riddle-manager.js' %}"></script>
-<script src="{% static 'riddles/js/sudoku.js' %}"></script>
-{% endblock %}
-
 {% block content %}
 <a href="{% url 'riddles:category' riddle.riddle_type.category.pk %}">{{ riddle.riddle_type.category.name }}</a><br />
 <a href="{% url 'riddles:type' riddle.riddle_type.pk %}">{{ riddle.riddle_type.name }}</a>
@@ -55,7 +49,9 @@
 
 {% block endscripts %}
 {{ block.super }}
-<script>
+<script type="module">
+    import * as RiddleManager from '{% static "riddles/js/riddle-manager.js" %}'
+    import * as Riddle from '{% static "riddles/js/sudoku.js" %}'
     Riddle.init("{{ riddle.pattern }}", "{{ state }}");
     RiddleManager.init();
     RiddleManager.adjustViewBox();
