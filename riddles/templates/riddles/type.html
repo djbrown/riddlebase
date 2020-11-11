@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}{{ category.name }}{% endblock %}
+{% block title %}{{ riddle_type.name }}{% endblock %}
 
 {% block content %}
 <a href="{% url 'riddles:category' riddle_type.category.id %}">{{ riddle_type.category.name }}</a>
