@@ -346,7 +346,7 @@ var Riddle = (function () {
         background.setAttribute("height", bBox.height);
     }
 
-    function init(pattern, state, boxRows) {
+    function init(pattern, state, boxRows = Math.pow(pattern.length, 1 / 4)) {
         var numbers = Math.sqrt(pattern.length);
         var boxColumns = numbers / boxRows;
 
