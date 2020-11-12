@@ -225,18 +225,18 @@ function showWinningAnimation() {
     }
 }
 
-function propose() {
-    let proposal = "";
+function check() {
+    let state = "";
     const cellValues = document.getElementsByClassName("riddle-cell-value");
     for (let i = 0; i < cellValues.length; i++) {
         const cellValue = cellValues[i].innerHTML;
         if (cellValue.trim() === "") {
             return;
         } else {
-            proposal += cellValue;
+            state += cellValue;
         }
     }
-    RiddleManager.check(proposal, showWinningAnimation);
+    RiddleManager.check(state, showWinningAnimation);
 }
 
 function createPickerCellClickFunction(value) {
@@ -244,7 +244,7 @@ function createPickerCellClickFunction(value) {
         const text = select.getElementsByClassName("riddle-cell-value")[0];
         text.innerHTML = value;
         endSelection();
-        propose();
+        check();
     };
 }
 
