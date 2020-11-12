@@ -1,8 +1,10 @@
 import datetime
 
 from django.conf import settings
-from django.http import Http404, HttpRequest, HttpResponse
+from django.http import Http404, HttpRequest, HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
 
 from .models import Riddle, RiddleCategory, RiddleType
 
@@ -45,3 +47,14 @@ def riddle(request: HttpRequest, pk: int) -> HttpResponse:
             context['incorrect'] = True
 
     return render(request, 'riddles/riddle.html', context)
+
+
+@csrf_exempt
+@require_POST
+def check(request: HttpRequest, pk: int) -> JsonResponse:
+    riddle = get_object_or_404(Riddle, pk=pk)
+
+    state = request.POST.get("state")
+    correct = state == riddle.solution
+    response = {'correct': correct}
+    return JsonResponse(response)

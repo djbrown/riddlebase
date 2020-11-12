@@ -10,4 +10,5 @@ urlpatterns = [
     path('category/<int:pk>/', views.category, name='category'),
     path('type/<int:pk>/', views.riddle_type, name='type'),
     path('riddle/<int:pk>/', views.riddle, name='riddle'),
+    path('riddle/<int:pk>/check/', views.check, name='check'),
 ]
