@@ -16,7 +16,7 @@ class RiddleCategory(models.Model):
             raise ValidationError('You cannot set the parent to the object itself.')
 
     def __str__(self):
-        return "RiddleCategory: {}".format(self.name)
+        return self.name
 
 
 class RiddleType(models.Model):
@@ -25,7 +25,7 @@ class RiddleType(models.Model):
     category = models.ForeignKey(RiddleCategory, on_delete=models.CASCADE)
 
     def __str__(self):
-        return "RiddleType: {}".format(self.name)
+        return self.name
 
 
 class Riddle(models.Model):
@@ -67,7 +67,7 @@ class Riddle(models.Model):
         return state_values
 
     def __str__(self):
-        return "Riddle: {} {}".format(self.riddle_type.name, self.pk)
+        return f"{self.riddle_type.name} {self.pk}"
 
 
 class RiddleState(models.Model):
@@ -80,4 +80,4 @@ class RiddleState(models.Model):
         unique_together = ("user", "riddle")
 
     def __str__(self) -> str:
-        return "RiddleState: {} {}".format(self.riddle, self.user)
+        return f"{self.riddle.riddle_type.name} {self.riddle.pk} {self.user.name}"
