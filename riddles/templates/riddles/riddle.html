@@ -12,8 +12,8 @@
 <a href="{% url 'riddles:category' riddle.riddle_type.category.pk %}">{{ riddle.riddle_type.category.name }}</a><br />
 <a href="{% url 'riddles:type' riddle.riddle_type.pk %}">{{ riddle.riddle_type.name }}</a>
 <h1>{{ riddle.riddle_type.name }} {{ riddle.pk }}</h1>
-<a href="">Prev</a>
-<a href="">Next</a>
+<a {% if previous %}href="{% url 'riddles:riddle' previous.pk %}" {% endif %}>&lt;&lt;</a>
+<a {% if next %}href="{% url 'riddles:riddle' next.pk %}" {% endif %}>&gt;&gt;</a>
 <form method="post" class="{% if incorrect %}incorrect{% endif %}{% if correct %}correct{% endif %}">
     {% csrf_token %}
     <textarea name="state" rows="8" cols="15">{{ state }}</textarea>

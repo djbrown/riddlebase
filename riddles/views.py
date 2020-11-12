@@ -31,6 +31,8 @@ def riddle(request: HttpRequest, pk: int) -> HttpResponse:
     riddle = get_object_or_404(Riddle, pk=pk)
     context = {
         'riddle': riddle,
+        'previous': Riddle.objects.filter(pk__lt=pk).order_by('pk').last(),
+        'next': Riddle.objects.filter(pk__gt=pk).order_by('pk').first(),
     }
 
     state = request.POST.get('state', request.session.get('state', riddle.pattern))
