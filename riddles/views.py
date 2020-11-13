@@ -44,7 +44,7 @@ def riddle(request: HttpRequest, pk: int) -> HttpResponse:
     if state == riddle.solution:
         context['correct'] = True
 
-    if request.POST.get('check'):
+    if request.POST.get('submit'):
         if state != riddle.solution:
             context['incorrect'] = True
 

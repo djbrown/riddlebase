@@ -225,6 +225,20 @@ function showWinningAnimation() {
     }
 }
 
+function gatherState() {
+    let state = "";
+    const cellValues = document.getElementsByClassName("riddle-cell-value");
+    for (let i = 0; i < cellValues.length; i++) {
+        const cellValue = cellValues[i].innerHTML;
+        if (cellValue.trim() === "") {
+            state += "-";
+        } else {
+            state += cellValue;
+        }
+    }
+    return state;
+}
+
 function check() {
     let state = "";
     const cellValues = document.getElementsByClassName("riddle-cell-value");
@@ -243,6 +257,11 @@ function createPickerCellClickFunction(value) {
     return function () {
         const text = select.getElementsByClassName("riddle-cell-value")[0];
         text.innerHTML = value;
+
+        const stateInput = document.getElementById("state");
+        const state = gatherState();
+        stateInput.value = state;
+
         endSelection();
         check();
     };
@@ -345,14 +364,15 @@ function createPickerGrid(numbers) {
 }
 
 export function init(pattern, state, boxRows = Math.pow(pattern.length, 1 / 4)) {
-    const numbers = Math.sqrt(pattern.length);
-    const boxColumns = numbers / boxRows;
+    const numbersCount = Math.sqrt(pattern.length);
+    const boxColumns = numbersCount / boxRows;
 
     createRiddleCells(pattern, state);
-    createRiddleGrid(numbers, boxRows, boxColumns);
+    createRiddleGrid(numbersCount, boxRows, boxColumns);
 
-    createPickerCells(numbers);
-    createPickerGrid(numbers);
+    createPickerCells(numbersCount);
+    createPickerGrid(numbersCount);
 
     hidePicker();
+    check();
 }

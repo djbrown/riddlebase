@@ -90,3 +90,7 @@ export function check(state, correctFallbackFunction) {
     ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     ajax.send(`state=${state}`);
 }
+
+export function updateStateInputValue(state) {
+    document.getElementById("state").innerHTML = state;
+}
