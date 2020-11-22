@@ -12,6 +12,7 @@ __pycache__/
 ### Tools
 # .mypy_cache/
 /geckodriver.log
+.python-version
 
 ### Local
 /tmp/
