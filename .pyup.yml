@@ -1,0 +1,6 @@
+update: insecure
+schedule: "every month"
+search: false
+requirements:
+  - pyproject.toml
+  - poetry.lock
